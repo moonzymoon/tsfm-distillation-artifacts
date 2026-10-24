@@ -1,29 +1,36 @@
-JoS 投稿包（2026-10-10 组装，终版）
-================================
+JoS 投稿包（2026-10-25 终版，Snapp 平台）
+========================================
 
-文件清单
-  main_submission.tex    单文件稿源（sn-jnl 要求：无 \input，全部内联；边界刻画口径）
-  refs.bib               参考文献库（26 条，全部审计核实，18 份 PDF 存档于 literature/refs_pdf/）
-  sn-jnl.cls / sn-basic.bst  Springer Nature 模板 v3.1 (2024-12)
-  figures/               7 张图（PDF 矢量）
-  cover_letter_JoS.md    给编辑的信（边界刻画口径；[Author Name] 等占位待填）
-  suggested_reviewers.md 5 人建议审稿人名单 + Title Page 录入稿（邮箱需官网核实后填）
-  manuscript_preview.pdf 编译预览（31 页；与正式版逐字一致）
+平台：Springer Snapp（JoS 已从 Editorial Manager 迁移；投稿入口见期刊官网
+"Submit manuscript" 按钮，或 https://www.editorialmanager.com/susc 重定向）。
 
-投稿步骤（全部就绪后）
-  1. 把 main_submission.tex 开头作者块和 cover_letter_JoS.md、suggested_reviewers.md
-     中的占位替换为真实信息（姓名/单位/邮箱/ORCID/基金）；
-  2. 登录 https://www.editorialmanager.com/susc/ → Submit → 按系统录入
-     （题名/摘要 250 词/6 关键词可从 tex 首页直接复制；分类与编辑按系统列表选）；
-  3. 上传 main_submission.tex + refs.bib + figures/ + 模板两文件（或按系统提示合并上传
-     manuscript_preview.pdf 作为编译版）；
-  4. suggested reviewers 从 suggested_reviewers.md 录入（邮箱官网核实）；
-  5. 提交后在"已投稿论文汇总表.xlsx"手动加行（台账规约见该目录 README；
-     同时把第二十篇期刊列从"候选 Machine Learning"更新为 The Journal of Supercomputing）。
+上传用文件（本目录与 submission_flat/ 均为最终版，哈希 d81c3613）
+  ../em_latex_source.zip  12 个源文件平铺 zip（main_submission.tex + refs.bib
+                          + sn-jnl.cls + sn-basic.bst + 8 张图 PDF）——
+                          Snapp 的 "Upload manuscript" 直接传它，平台自行编译
+  manuscript_preview.pdf  终稿预览（33 页；含 GitHub 链接与 Zenodo DOI；
+                          平台自行编译时无需上传，仅备核对）
+  cover_letter_plain.txt  Cover Letter 全文（含 GitHub/Zenodo 链接，直接粘贴）
+  cover_letter_JoS.md     同上的 markdown 版
+  suggested_reviewers.md  5 人审稿人名单（4 人邮箱已核实；Kai-Chen Yang 的邮箱
+                          提交时从 ScienceDirect 文章页作者面板核实）+
+                          Title Page 录入稿（含全部声明文本）
+
+系统录入速查
+  Title: Distilling Frozen Time-Series Foundation Model Teachers into
+  Lightweight Edge Anomaly Detectors: A Preregistered Quality-Fidelity-Cost Study
+  Abstract: 148 词（main_submission.tex 的 bstract{...}，限 100-150）
+  Keywords: time series anomaly detection; knowledge distillation;
+  time-series foundation models; edge deployment; ONNX quantization;
+  preregistered evaluation
+  Funding: The authors received no specific funding for this work.
+  Competing interests: The authors declare no competing interests.
+  Data availability: 见 cover letter / Title Page 中的同一句（含两个链接）
+  通讯作者电话：表格必填，提前备好
+
+已发布的工件（正文与信中均已引用）
+  GitHub: https://github.com/moonzymoon/tsfm-distillation-artifacts (tag v1.0)
+  Zenodo: https://doi.org/10.5281/zenodo.23623799
 
 编译复现：pdflatex main_submission && bibtex main_submission && pdflatex x2
-（MiKTeX/TeX Live 均可；figures/ 需与 tex 同目录）
-
-Artifact 仓库：release/ 目录（48MB）已按数据声明承诺清单配齐
-（代码/预注册+R1-R15 哈希链/全部逐 run 结果含 R6-R8 与训练后计时工件/缓存元数据），
-建 GitHub/Zenodo 后取链接填入数据声明占位。
+（干净目录 + em_latex_source.zip 实测通过：33 页、零未解析引用，2026-10-25）

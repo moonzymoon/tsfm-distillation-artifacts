@@ -53,8 +53,10 @@ This manuscript is original, has not been published previously, and is
 not under consideration elsewhere. All authors have approved the
 submission and declare no conflicts of interest. All benchmark data are
 public; code, the preregistration with its hash chain, and per-run
-results will be released with an archived DOI upon acceptance (review
-complete artifact package accompanies the submission).
+results are released at
+https://github.com/moonzymoon/tsfm-distillation-artifacts and archived
+with the Zenodo DOI https://doi.org/10.5281/zenodo.23623799; the
+complete artifact package accompanies the submission.
 
 Thank you for your consideration.
 
