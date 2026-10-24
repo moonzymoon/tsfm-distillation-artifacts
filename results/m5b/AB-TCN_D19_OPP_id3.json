@@ -1,0 +1,31 @@
+{
+ "arm": "AB-TCN",
+ "flow": "D19_OPP_id3",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1666,
+   "spearman": 0.1241,
+   "pair_agree": 0.5459,
+   "top5_overlap": 0.0465,
+   "params": 360273
+  },
+  "s1": {
+   "vus_pr": 0.2298,
+   "spearman": 0.1044,
+   "pair_agree": 0.5412,
+   "top5_overlap": 0.0465,
+   "params": 360273
+  },
+  "s2": {
+   "vus_pr": 0.2825,
+   "spearman": 0.0842,
+   "pair_agree": 0.5242,
+   "top5_overlap": 0.1163,
+   "params": 360273
+  }
+ },
+ "mean": 0.2263,
+ "std": 0.0474,
+ "wallclock_s": 70.4
+}

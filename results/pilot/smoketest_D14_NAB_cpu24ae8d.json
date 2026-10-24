@@ -1,0 +1,53 @@
+{
+ "D14_NAB_cpu24ae8d": {
+  "flow": "D14_NAB_cpu24ae8d",
+  "test_AR": 0.1146,
+  "device": "cuda",
+  "runs": {
+   "A-TCN-s0": {
+    "vus_pr": 0.193,
+    "params": 241201,
+    "train_s": 3.4
+   },
+   "A-PM-s0": {
+    "vus_pr": 0.2024,
+    "params": 199057,
+    "train_s": 0.8
+   },
+   "C-TCN-s0": {
+    "vus_pr": 0.2173,
+    "params": 241201,
+    "train_s": 2.0
+   },
+   "C-PM-s0": {
+    "vus_pr": 0.1205,
+    "params": 199057,
+    "train_s": 1.5
+   }
+  },
+  "pca": {
+   "vus_pr": 0.1356,
+   "storage_mb": 0.0
+  },
+  "teacher": {
+   "vus_pr": 0.2224
+  },
+  "A-TCN": {
+   "mean": 0.193,
+   "std": 0.0
+  },
+  "A-PM": {
+   "mean": 0.2024,
+   "std": 0.0
+  },
+  "C-TCN": {
+   "mean": 0.2173,
+   "std": 0.0
+  },
+  "C-PM": {
+   "mean": 0.1205,
+   "std": 0.0
+  },
+  "wallclock_s": 11.9
+ }
+}

@@ -1,0 +1,31 @@
+{
+ "arm": "AB-TCN",
+ "flow": "D6_MSL_id10",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0881,
+   "spearman": -0.0012,
+   "pair_agree": 0.508,
+   "top5_overlap": 0.0204,
+   "params": 267633
+  },
+  "s1": {
+   "vus_pr": 0.0942,
+   "spearman": 0.0271,
+   "pair_agree": 0.513,
+   "top5_overlap": 0.0204,
+   "params": 267633
+  },
+  "s2": {
+   "vus_pr": 0.1066,
+   "spearman": 0.0235,
+   "pair_agree": 0.5153,
+   "top5_overlap": 0.0612,
+   "params": 267633
+  }
+ },
+ "mean": 0.0963,
+ "std": 0.0077,
+ "wallclock_s": 6.8
+}

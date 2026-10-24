@@ -1,0 +1,23 @@
+{
+ "tag": "B1-PatchMLPLite-L512",
+ "flow": "D18_Exathlon_id1",
+ "L": 512,
+ "case": "B1",
+ "backbone": "PatchMLPLite",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.8691,
+   "params": 621762
+  },
+  "s1": {
+   "vus_pr": 0.8649,
+   "params": 621762
+  },
+  "s2": {
+   "vus_pr": 0.9095,
+   "params": 621762
+  }
+ },
+ "mean": 0.8812
+}

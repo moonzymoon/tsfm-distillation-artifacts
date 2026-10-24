@@ -1,0 +1,32 @@
+{
+ "arm": "B2",
+ "backbone": "PatchMLP256",
+ "flow": "D18_Exathlon_id1",
+ "params": 563601,
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.9068,
+   "spearman": 0.1572,
+   "pair_agree": 0.547,
+   "top5_overlap": 0.1328,
+   "params": 567698
+  },
+  "s1": {
+   "vus_pr": 0.9429,
+   "spearman": 0.3674,
+   "pair_agree": 0.628,
+   "top5_overlap": 0.1262,
+   "params": 567698
+  },
+  "s2": {
+   "vus_pr": 0.9471,
+   "spearman": 0.3635,
+   "pair_agree": 0.614,
+   "top5_overlap": 0.1315,
+   "params": 567698
+  }
+ },
+ "mean": 0.9323,
+ "median_spearman": 0.3635
+}

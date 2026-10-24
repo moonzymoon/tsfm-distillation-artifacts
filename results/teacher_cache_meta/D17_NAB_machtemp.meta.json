@@ -1,0 +1,17 @@
+{
+ "flow": "D17_NAB_machtemp",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-03T14:16:33",
+ "wallclock_s": 18.9,
+ "train_shape": [
+  11347,
+  1
+ ],
+ "test_shape": [
+  11348,
+  1
+ ],
+ "test_AR": 0.2799,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

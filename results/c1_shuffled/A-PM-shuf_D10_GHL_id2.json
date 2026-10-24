@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D10_GHL_id2",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0128,
+   "params": 217489
+  },
+  "s1": {
+   "vus_pr": 0.0912,
+   "params": 217489
+  }
+ },
+ "mean": 0.052
+}

@@ -1,0 +1,155 @@
+{
+ "protocol": "Raspberry Pi 4B Rev 1.4 (4 GB), Raspberry Pi OS 64-bit (Debian 12 bookworm), ONNX Runtime 1.31.0, single thread, batch 1, L=128; 5 rounds x (50 warm + 500 timed); CPU governor=performance",
+ "entries": [
+  {
+   "label": "LINEAR",
+   "p95_ms": 0.4425,
+   "quality": 0.3229,
+   "p50_ms": 0.3664,
+   "rss_mb": 59.2,
+   "throughput_win_per_s": 2729.3,
+   "offset": [
+    4,
+    -11
+   ]
+  },
+  {
+   "label": "C-PM (PM INT8)",
+   "p95_ms": 2.0035,
+   "quality": 0.2501,
+   "p50_ms": 1.9701,
+   "rss_mb": 60.2,
+   "throughput_win_per_s": 507.6,
+   "offset": [
+    5,
+    5
+   ]
+  },
+  {
+   "label": "B1-TCN (TCN FP32)",
+   "p95_ms": 15.4698,
+   "quality": 0.2778,
+   "p50_ms": 15.3008,
+   "rss_mb": 62.3,
+   "throughput_win_per_s": 65.4,
+   "offset": [
+    5,
+    5
+   ]
+  }
+ ],
+ "detail": [
+  {
+   "model": "LINEAR",
+   "prec": "FP32",
+   "p50_ms": {
+    "median": 0.3664,
+    "min": 0.3658,
+    "max": 0.3687
+   },
+   "p95_ms": {
+    "median": 0.4425,
+    "min": 0.4393,
+    "max": 0.4441
+   },
+   "file_MB": 0.034,
+   "rss_mb": 59.2
+  },
+  {
+   "model": "LINEAR",
+   "prec": "INT8",
+   "p50_ms": {
+    "median": 0.3042,
+    "min": 0.3037,
+    "max": 0.3048
+   },
+   "p95_ms": {
+    "median": 0.3408,
+    "min": 0.3404,
+    "max": 0.3444
+   },
+   "file_MB": 0.011,
+   "rss_mb": 59.2
+  },
+  {
+   "model": "PatchMLP",
+   "prec": "FP32",
+   "p50_ms": {
+    "median": 2.6213,
+    "min": 2.6172,
+    "max": 2.6218
+   },
+   "p95_ms": {
+    "median": 2.6731,
+    "min": 2.669,
+    "max": 2.6754
+   },
+   "file_MB": 1.068,
+   "rss_mb": 61.1
+  },
+  {
+   "model": "PatchMLP",
+   "prec": "INT8",
+   "p50_ms": {
+    "median": 1.9701,
+    "min": 1.9691,
+    "max": 1.9713
+   },
+   "p95_ms": {
+    "median": 2.0035,
+    "min": 2.0031,
+    "max": 2.0185
+   },
+   "file_MB": 0.282,
+   "rss_mb": 60.2
+  },
+  {
+   "model": "TCN",
+   "prec": "FP32",
+   "p50_ms": {
+    "median": 15.3008,
+    "min": 15.298,
+    "max": 15.3112
+   },
+   "p95_ms": {
+    "median": 15.4698,
+    "min": 15.4511,
+    "max": 15.5155
+   },
+   "file_MB": 1.095,
+   "rss_mb": 62.3
+  },
+  {
+   "model": "TCN",
+   "prec": "INT8",
+   "p50_ms": {
+    "median": 21.6253,
+    "min": 21.619,
+    "max": 21.6323
+   },
+   "p95_ms": {
+    "median": 21.834,
+    "min": 21.8074,
+    "max": 21.8483
+   },
+   "file_MB": 0.288,
+   "rss_mb": 60.6
+  }
+ ],
+ "meta": {
+  "temp_c_start": 49.2,
+  "temp_c_end": 50.6,
+  "temp_c_series": [
+   49.2,
+   49.7,
+   51.1,
+   50.1,
+   50.6,
+   52.1,
+   50.6
+  ],
+  "n_procs": 4,
+  "date": "2026-10-12 23:02",
+  "wall_s": 142.8
+ }
+}

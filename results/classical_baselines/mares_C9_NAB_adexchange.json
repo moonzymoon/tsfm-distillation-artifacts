@@ -1,0 +1,6 @@
+{
+ "method": "mares",
+ "flow": "C9_NAB_adexchange",
+ "vus_pr": 0.2034,
+ "wallclock_s": 0.3
+}

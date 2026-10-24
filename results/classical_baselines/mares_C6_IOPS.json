@@ -1,0 +1,6 @@
+{
+ "method": "mares",
+ "flow": "C6_IOPS",
+ "vus_pr": 0.561,
+ "wallclock_s": 5.6
+}

@@ -1,0 +1,31 @@
+{
+ "arm": "LINEAR",
+ "flow": "D9_SMAP_id13",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0372,
+   "spearman": -0.3985,
+   "pair_agree": 0.3736,
+   "top5_overlap": 0.0141,
+   "params": 3176
+  },
+  "s1": {
+   "vus_pr": 0.0372,
+   "spearman": -0.4018,
+   "pair_agree": 0.3586,
+   "top5_overlap": 0.0282,
+   "params": 3176
+  },
+  "s2": {
+   "vus_pr": 0.0372,
+   "spearman": -0.4141,
+   "pair_agree": 0.3619,
+   "top5_overlap": 0.0141,
+   "params": 3176
+  }
+ },
+ "mean": 0.0372,
+ "std": 0.0,
+ "wallclock_s": 1.4
+}

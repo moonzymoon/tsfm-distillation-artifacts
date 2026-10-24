@@ -1,0 +1,43 @@
+{
+ "arm": "C-PM-TF",
+ "flow": "C3_Daphnet_id1",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1964,
+   "spearman": 0.5825,
+   "pair_agree": 0.7275,
+   "top5_overlap": 0.3788,
+   "params": 207249
+  },
+  "s1": {
+   "vus_pr": 0.1845,
+   "spearman": 0.6701,
+   "pair_agree": 0.75,
+   "top5_overlap": 0.22,
+   "params": 207249
+  },
+  "s2": {
+   "vus_pr": 0.1077,
+   "spearman": -0.4642,
+   "pair_agree": 0.3427,
+   "top5_overlap": 0.2718,
+   "params": 207249
+  },
+  "s3": {
+   "vus_pr": 0.3947,
+   "spearman": 0.2939,
+   "pair_agree": 0.615,
+   "top5_overlap": 0.4247,
+   "params": 207249
+  },
+  "s4": {
+   "vus_pr": 0.1997,
+   "spearman": 0.5071,
+   "pair_agree": 0.691,
+   "top5_overlap": 0.2859,
+   "params": 207249
+  }
+ },
+ "mean": 0.2166
+}

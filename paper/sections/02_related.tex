@@ -1,0 +1,91 @@
+% ---------------------------------------------------------------------------
+% Section 2: Related Work (five lines, cutting sentences locked 2026-10-03)
+% ---------------------------------------------------------------------------
+\section{Related Work}\label{sec:related}
+
+\subsection{Knowledge Distillation for Anomaly Detection}
+Knowledge distillation (KD)~\cite{hinton2015kd} entered anomaly detection as a
+\emph{detection mechanism}: a pre-trained teacher and a student of identical
+capacity are both trained on normal data, and test-time anomalies are flagged
+by the divergence between their outputs. This teacher--student paradigm is
+established in the image domain~\cite{unifiededge2024} and, for time
+series, AnomalyLLM~\cite{anomalyllm2024} adapts a large-language-model teacher
+to the target domain and scores anomalies by teacher--student divergence,
+claiming the first KD-based time-series anomaly detector. Multi-teacher KD for anomaly detection~\cite{ma2023multiteacher} extends the
+paradigm in the Journal of Systems Architecture, and attention-based TSAD
+frameworks such as IA-AD appear in The Journal of Supercomputing~\cite{iaad2025}. These detectors are single-model systems trained per domain, not distilled edge
+students with a teacher-exit deployment path. Our setting differs
+on all three defining axes. First, the teacher is a \emph{frozen}
+time-series foundation model (TSFM) used \emph{zero-shot}: it is never adapted
+to the target domain, and its anomaly scoring pipeline is fixed in advance.
+Second, distillation serves as \emph{model compression} rather than as the
+scoring mechanism. The student replaces the teacher entirely at inference
+time, whereas mechanism-style KD keeps the teacher in the inference loop.
+Third, we evaluate the resulting trade-off along quality, fidelity, and cost
+axes under explicit resource budgets, which mechanism-style studies do not
+consider.
+
+\subsection{Compressing and Distilling Time-Series Foundation Models}
+On the forecasting side, compressing TSFMs is well explored:
+the Chronos family introduces Chronos-Bolt, an efficient
+encoder-only variant~\cite{ansari2024chronos}. DistilTS~\cite{distilts2026} distills TSFM forecasting
+capability (output and hidden alignment under difficulty-aware sample
+weighting) into compact students. TTM~\cite{ekambaram2023ttm},
+SparseTSF~\cite{hui2024sparsetsf}, and FITS~\cite{xu2024fits} build tiny
+forecasters from scratch. TinyCast~\cite{tinycast2026} reaches 146K-parameter
+zero-shot probabilistic forecasting with computed periodicity and
+depthwise-separable convolutions, without distillation.
+Concurrent work explores the opposite direction, keeping the TSFM in
+the inference loop: ChronosAD~\cite{chronosad2026} uses Chronos as a
+zero-shot feature extractor with a temporal refinement head, at the
+cost of a foundation model at inference time. On the
+classification side, TinyCN~\cite{tinycn2026} distills the Mantis
+foundation model~\cite{mantis2025} into tiny convolutional classifiers. None
+of these works distills \emph{detection} behavior, and a forecaster distilled
+for point accuracy need not preserve anomaly-scoring behavior; we therefore
+treat ``forecast-distillation-then-residual'' as an explicit control arm
+(B2) rather than assuming it equivalent to score distillation. Concurrent
+domain-specific work distills fine-tuned industrial foundation models for
+particle-physics trigger hardware~\cite{ancone2026daq}; it neither addresses
+general-purpose anomaly detection nor uses frozen zero-shot teachers.
+
+\subsection{TSFMs as Zero-Shot Anomaly Detectors}
+Systematic evaluations show that frozen TSFMs can act as zero-shot anomaly
+detectors through forecasting-residual pipelines, but with strongly
+condition-dependent reliability. Aggregated evaluations over public
+benchmarks~\cite{tsfmad2024eval} and the TSB-AD suite~\cite{tsbad2024} report
+large variance across datasets, and continuous (level-shift) anomalies are a
+known failure signature~\cite{uray2026}. A leakage-aware evaluation protocol
+with a lightweight trainable head over frozen TSFM
+representations~\cite{clra2026} reaches conclusions consistent with
+representation--detectability gaps. These studies characterize \emph{how good
+the teacher is}; none asks whether that behavior can be moved into a
+deployable student. Our protocol reuses their interface design (Section
+\ref{sec:protocol}) and cites their numbers as teacher priors, while the
+fidelity--quality analysis is complementary to their audit perspective.
+
+\subsection{Lightweight Time-Series Anomaly Detection}
+Lightweight TSAD spans classical baselines (Matrix
+Profile~\cite{matrixprofile2016}, PCA reconstruction, LOF, one-class SVM),
+compact neural detectors, and edge-oriented systems that combine KD with
+quantization~\cite{unifiededge2024}. Benchmark suites score such methods on
+accuracy, with TSB-AD~\cite{tsbad2024} and TAB~\cite{tab2025} using
+VUS-PR~\cite{vus2022} as the primary metric, but do not couple accuracy to
+latency, model size, or memory budgets, and edge-oriented TSAD papers
+typically report custom efficiency metrics. The combination of a fixed
+accuracy benchmark with explicit resource-constraint tiers and a preregister
+protocol is, to our knowledge, open territory; our three-axis evaluation
+framework is designed to occupy it.
+
+\subsection{Positioning}
+In summary, existing work provides (i) the KD-AD lineage whose teachers are
+domain-adapted and remain in the inference loop, (ii) TSFM compression for
+forecasting and classification, (iii) audits of frozen TSFMs as detectors,
+and (iv) accuracy-only lightweight benchmarks. What is missing is a
+preregistered answer to the deployment question. When a frozen TSFM's
+detection behavior is distilled into a compact student that
+must run without the teacher, what actually transfers, and is the result
+competitive with strong classical baselines under the same resource budget?
+Section~\ref{sec:protocol} defines our protocol for answering this, and
+Sections~\ref{sec:dev-results} and~\ref{sec:confirm} report the answer, including a
+prominent boundary delineation. The score interface fails to transfer, the forecast interface does not.

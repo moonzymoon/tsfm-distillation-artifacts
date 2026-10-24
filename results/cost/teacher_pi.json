@@ -1,0 +1,9 @@
+{
+ "teacher": "/home/pi/rpi_timing/cbb",
+ "device": "Raspberry Pi 4B Rev 1.4 (cpu, float32)",
+ "protocol": "batch 1, context 512, horizon 1, end-to-end predict call, 3 warm-up + 30 timed",
+ "p50_ms": 2401.1,
+ "p95_ms": 2415.9,
+ "mean_ms": 2390.3,
+ "per_point_ms": 2390.273
+}

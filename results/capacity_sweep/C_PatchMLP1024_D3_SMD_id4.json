@@ -1,0 +1,32 @@
+{
+ "arm": "C",
+ "backbone": "PatchMLP1024",
+ "flow": "D3_SMD_id4",
+ "params": 5562769,
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0458,
+   "spearman": 0.2901,
+   "pair_agree": 0.5985,
+   "top5_overlap": 0.0648,
+   "params": 5562769
+  },
+  "s1": {
+   "vus_pr": 0.134,
+   "spearman": 0.4441,
+   "pair_agree": 0.6542,
+   "top5_overlap": 0.5427,
+   "params": 5562769
+  },
+  "s2": {
+   "vus_pr": 0.0862,
+   "spearman": 0.447,
+   "pair_agree": 0.6567,
+   "top5_overlap": 0.5677,
+   "params": 5562769
+  }
+ },
+ "mean": 0.0887,
+ "median_spearman": 0.4441
+}

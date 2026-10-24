@@ -1,0 +1,31 @@
+{
+ "arm": "B2-TCN",
+ "flow": "D12_EMG",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1177,
+   "spearman": 0.9822,
+   "pair_agree": 0.9467,
+   "top5_overlap": 0.8104,
+   "params": 245074
+  },
+  "s1": {
+   "vus_pr": 0.1177,
+   "spearman": 0.9822,
+   "pair_agree": 0.949,
+   "top5_overlap": 0.8102,
+   "params": 245074
+  },
+  "s2": {
+   "vus_pr": 0.1177,
+   "spearman": 0.9821,
+   "pair_agree": 0.9475,
+   "top5_overlap": 0.8101,
+   "params": 245074
+  }
+ },
+ "mean": 0.1177,
+ "std": 0.0,
+ "wallclock_s": 204.1
+}

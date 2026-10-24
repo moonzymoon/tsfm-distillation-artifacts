@@ -1,0 +1,31 @@
+{
+ "arm": "B2-PM",
+ "flow": "D19_OPP_id3",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.16,
+   "spearman": -0.0537,
+   "pair_agree": 0.4894,
+   "top5_overlap": 0.0,
+   "params": 454034
+  },
+  "s1": {
+   "vus_pr": 0.16,
+   "spearman": -0.0365,
+   "pair_agree": 0.4871,
+   "top5_overlap": 0.0,
+   "params": 454034
+  },
+  "s2": {
+   "vus_pr": 0.16,
+   "spearman": 0.0061,
+   "pair_agree": 0.5101,
+   "top5_overlap": 0.0,
+   "params": 454034
+  }
+ },
+ "mean": 0.16,
+ "std": 0.0,
+ "wallclock_s": 42.7
+}

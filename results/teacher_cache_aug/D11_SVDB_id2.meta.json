@@ -1,0 +1,7 @@
+{
+ "flow": "D11_SVDB_id2",
+ "teacher": "amazon/chronos-bolt-base",
+ "injection": "1% spikes + 1% level-shifts(100pts), k in {3,5,8}sigma, seed=999",
+ "built": "2026-10-07T22:55:10",
+ "wallclock_s": 90.8
+}

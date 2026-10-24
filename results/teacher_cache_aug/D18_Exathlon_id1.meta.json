@@ -1,0 +1,7 @@
+{
+ "flow": "D18_Exathlon_id1",
+ "teacher": "amazon/chronos-bolt-base",
+ "injection": "1% spikes + 1% level-shifts(100pts), k in {3,5,8}sigma, seed=999",
+ "built": "2026-10-07T22:58:10",
+ "wallclock_s": 179.1
+}

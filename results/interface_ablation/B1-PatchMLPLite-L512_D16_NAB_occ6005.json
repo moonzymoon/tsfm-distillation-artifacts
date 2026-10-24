@@ -1,0 +1,23 @@
+{
+ "tag": "B1-PatchMLPLite-L512",
+ "flow": "D16_NAB_occ6005",
+ "L": 512,
+ "case": "B1",
+ "backbone": "PatchMLPLite",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.2501,
+   "params": 604354
+  },
+  "s1": {
+   "vus_pr": 0.2501,
+   "params": 604354
+  },
+  "s2": {
+   "vus_pr": 0.2,
+   "params": 604354
+  }
+ },
+ "mean": 0.2334
+}

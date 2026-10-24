@@ -1,0 +1,31 @@
+{
+ "arm": "B2-TCN",
+ "flow": "D17_NAB_machtemp",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.4614,
+   "spearman": 0.0371,
+   "pair_agree": 0.5135,
+   "top5_overlap": 0.159,
+   "params": 241714
+  },
+  "s1": {
+   "vus_pr": 0.4486,
+   "spearman": 0.0877,
+   "pair_agree": 0.523,
+   "top5_overlap": 0.1719,
+   "params": 241714
+  },
+  "s2": {
+   "vus_pr": 0.4667,
+   "spearman": 0.0728,
+   "pair_agree": 0.5268,
+   "top5_overlap": 0.1774,
+   "params": 241714
+  }
+ },
+ "mean": 0.4589,
+ "std": 0.0076,
+ "wallclock_s": 9.6
+}

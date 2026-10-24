@@ -1,0 +1,80 @@
+{
+ "arm": "B1-PM",
+ "flow": "C7_MITDB_id5",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0058,
+   "spearman": 0.0697,
+   "pair_agree": 0.524,
+   "top5_overlap": 0.3504,
+   "params": 202130
+  },
+  "s1": {
+   "vus_pr": 0.006,
+   "spearman": 0.0671,
+   "pair_agree": 0.524,
+   "top5_overlap": 0.3561,
+   "params": 202130
+  },
+  "s2": {
+   "vus_pr": 0.0062,
+   "spearman": 0.0687,
+   "pair_agree": 0.521,
+   "top5_overlap": 0.3619,
+   "params": 202130
+  },
+  "s3": {
+   "vus_pr": 0.0063,
+   "spearman": 0.0691,
+   "pair_agree": 0.5225,
+   "top5_overlap": 0.3619,
+   "params": 202130
+  },
+  "s4": {
+   "vus_pr": 0.0059,
+   "spearman": 0.0663,
+   "pair_agree": 0.5212,
+   "top5_overlap": 0.3558,
+   "params": 202130
+  },
+  "s5": {
+   "vus_pr": 0.0061,
+   "spearman": 0.0612,
+   "pair_agree": 0.5198,
+   "top5_overlap": 0.3465,
+   "params": 202130
+  },
+  "s6": {
+   "vus_pr": 0.0063,
+   "spearman": 0.0662,
+   "pair_agree": 0.5235,
+   "top5_overlap": 0.3552,
+   "params": 202130
+  },
+  "s7": {
+   "vus_pr": 0.0059,
+   "spearman": 0.0613,
+   "pair_agree": 0.5168,
+   "top5_overlap": 0.3558,
+   "params": 202130
+  },
+  "s8": {
+   "vus_pr": 0.0058,
+   "spearman": 0.067,
+   "pair_agree": 0.5192,
+   "top5_overlap": 0.3478,
+   "params": 202130
+  },
+  "s9": {
+   "vus_pr": 0.0061,
+   "spearman": 0.0675,
+   "pair_agree": 0.5182,
+   "top5_overlap": 0.3552,
+   "params": 202130
+  }
+ },
+ "mean": 0.006,
+ "std": 0.0002,
+ "wallclock_s": 186.4
+}

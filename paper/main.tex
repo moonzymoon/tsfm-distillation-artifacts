@@ -1,0 +1,604 @@
+% =========================================================================
+% Paper 20 (A3): Distilling a frozen TSFM teacher into lightweight students
+% Title direction locked at 5.3 (2026-10-04); final wording after confirm set.
+% Journal target: The Journal of Supercomputing (Springer) — sn-jnl class.
+% =========================================================================
+\documentclass[pdflatex,sn-basic,Numbered]{sn-jnl}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{manyfoot}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{float}
+
+\begin{document}
+
+\title{Distilling Frozen Time-Series Foundation Model Teachers into
+Lightweight Edge Anomaly Detectors: A Preregistered Quality--Fidelity--Cost
+Study}
+
+\author*[1]{\fnm{Yao} \sur{Zhang}}\email{zhangyao@bdu.edu.cn}
+\author[1]{\fnm{Yanling} \sur{Li}}
+\author[2]{\fnm{Yichen} \sur{Wang}}
+\affil[1]{\orgname{Department of Artificial Intelligence, Baoding University}, Baoding, China}
+\affil[2]{\orgname{Department of Education, Baoding University}, Baoding, China}
+
+\abstract{When a frozen time-series foundation model is distilled into a
+lightweight edge student, the bottleneck sits at the distillation
+interface, not at distillation itself.
+This preregistered study covers 29 preregistered flows plus one
+extension source, eleven arms, and 1{,}856 runs.
+Students trained on the teacher's scores transfer almost none of its
+ranking behavior (median Spearman $\rho = 0.184$).
+All confirmatory comparisons are non-significant at the nine held-out
+sources.
+Switching to the teacher's forecasts as the target recovers most of the
+gap on development flows.
+Three teacher families agree that ranking fidelity spans near zero to
+0.99 while no family gains detectable quality.
+Students run 200--1500$\times$ faster per point than the teacher on
+trained artifacts, and quantized PatchMLP students fit sub-millisecond,
+sub-megabyte budgets.
+On a Raspberry~Pi~4B students measure 0.44 to 15.47\,ms p95 while the
+teacher needs 2.4\,s per point.
+Zero-tuning classical scorers top the held-out macro.}\keywords{time series anomaly detection \sep knowledge distillation \sep time-series
+foundation models \sep edge deployment \sep ONNX quantization \sep preregistered evaluation}
+
+\maketitle
+
+% ---------------------------------------------------------------
+\section{Introduction}\label{sec:intro}
+
+Time-series anomaly detection (TSAD) at the edge faces a persistent
+trade-off. Detection quality demands expressive models. Latency,
+memory, and storage budgets cap what can be deployed. Time-series
+foundation models (TSFMs) such as Chronos, TimesFM, and Moirai add a
+new option. Used zero-shot through a forecasting-residual pipeline, a
+frozen TSFM scores anomalies on unseen streams with no per-device
+training. Here ``edge'' denotes sub-millisecond, sub-megabyte inference
+on exported artifacts. On-device validation on a Raspberry~Pi~4B
+replicates the desktop protocol at the reference dimension
+(Sections~\ref{sec:confirm-cost} and~\ref{sec:limitations}).
+
+Figure~\ref{fig:boundary} sketches the deployment question.
+Three candidate interfaces move the frozen teacher's signal into a
+compact student during offline training, and only the student artifact
+reaches the edge device.
+Zero-shot audits paint a conditional picture. Frozen TSFMs are
+competitive on some sources, weak on others, and orders of magnitude
+more expensive to run than classical detectors.
+
+This paper examines the natural next step. If the teacher is strong
+but heavy, distill it into a lightweight student and deploy the student
+at the edge. The proposal sounds straightforward, and its components
+exist. Knowledge distillation for anomaly detection is established,
+though the teacher there is domain-adapted and remains in the inference
+loop. TSFM compression is established on the forecasting side. What is
+missing is a disciplined answer to the deployment question itself. When
+the teacher's detection behavior is moved into a compact student
+($\approx$0.27M parameters at the reference dimension, scaling with
+channel count) that must run without the teacher, does anything of value
+transfer? Is the result competitive with strong classical baselines
+under the same resource budget?
+
+We answer this question with a preregistered study. We lock a causal
+scoring structure on a frozen Chronos-Bolt teacher, with model-specific
+point-forecast extraction when other teacher families are compared. We define three
+evaluation axes: quality measured by the volume under the
+precision--recall surface (VUS-PR), fidelity to the teacher's scoring
+behavior, and edge cost on exported artifacts. We train eleven arms on
+20 development flows from source-blocked collections. These include
+score-level and ranking-level distillation of the teacher's scores, a
+forecast-distillation control, self-supervised students that never see
+the teacher, a linear floor, a fixed-configuration PCA baseline, and
+the teacher itself. We then confirm the preregistered arms at 10
+seeds on 9 held-out sources. In total: 1{,}270 preregistered training
+runs across 29 flows from 22 data collections, with the full
+preregistration and its revision log in the artifact package.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_boundary.pdf}
+\caption{Mechanism overview. (a)~Offline training: a frozen TSFM teacher
+feeds three candidate interfaces (its anomaly scores, its point forecasts,
+or no teacher signal at all) into a compact student trained on normal-only
+segments. (b)~Deployment: only the exported student artifact runs on the
+edge device; the teacher is retired and never deployed. The score
+interface transfers little ranking fidelity.}
+\label{fig:boundary}
+\end{figure}
+
+The answer, under this protocol, is a
+\emph{delineated boundary} rather than a blanket verdict, and its
+location is instructive.
+The distillation \emph{interface} decides what transfers.
+Score-level distillation transfers little
+of the teacher's ranking behavior (median $\rho = 0.184$) and shows no
+statistically detectable quality advantage; the study is powered to
+rule out only large differences. On held-out sources the score arm is
+the weakest of the six student arms, behind self-supervised students
+and behind a linear predictor. Replacing the
+score target by the teacher's \emph{forecast} closes most of the
+deficit on the development set and is equivalent to
+self-supervision on held-out sources. Four controls (shuffled-teacher,
+equal-context, anomaly-exposure, and a second teacher family) trace
+the failure to the score interface itself. The teacher is simultaneously
+200--1500$\times$ slower per
+point than its students and no better than the strongest of them on
+held-out sources. The fixed-configuration PCA baseline tops the macro
+table on certain anomaly morphologies but fails catastrophically on
+others that the students handle.
+Three zero-tuning classical scorers added under the final revision
+ sharpen the classical anchor: two of them top the held-out macro
+above every neural arm, while trained students keep a clear advantage
+on the highest-channel source. What remains valuable is conditional:
+score-distilled students occupy a niche on persistence-type anomalies
+where both the teacher's signal and temporal structure matter.
+
+Our contributions are fourfold. (C1)~A preregistered, source-blocked
+evaluation protocol for TSFM-teacher distillation into edge students,
+covering quality, fidelity, and deployment cost on exported ONNX
+artifacts with optional INT8 quantization and explicit E1/E2 edge
+budget tiers. (C2)~A mechanism-level boundary delineation. The
+distillation interface, not distillation itself, decides what
+transfers. Score-level distillation transfers little fidelity and no
+detectable quality advantage over self-supervision. (C3)~The interface
+analysis itself. The teacher's \emph{forecast} target is equivalent to
+self-supervision while its \emph{score} target is not, with
+shuffled-teacher, equal-context, anomaly-exposure, and second-teacher
+controls attributing the failure to the score interface. (C4)~A
+practitioner selection table mapping anomaly morphologies and resource
+budgets to detectors. All artifacts will be released with the
+submission and archived upon acceptance.
+
+% ---------------------------------------------------------------
+\input{sections/02_related}
+\input{sections/03_protocol}
+
+\input{sections/04_setup}
+
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/fig_fidelity_quality.pdf}
+\caption{Fidelity--quality decoupling. Each point is one training run
+with finite fidelity (809 runs: 389 main-grid plus 420 auxiliary-arm
+runs; per-run Spearman $\rho$ against the teacher vs.\ that run's
+VUS-PR), colored by
+distillation-signal family. The dashed line is the median over all
+plotted runs ($\rho = 0.148$); the median over the 389 main-grid runs
+alone is 0.184 (Section~\ref{sec:dev-fidelity}). High quality does not require high fidelity; where fidelity is
+high, students inherit the teacher's level, including its weaknesses.}
+\label{fig:fidelity}
+\end{figure}
+
+\input{sections/04_dev}
+
+
+
+\input{sections/05_confirm}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/fig_cost_quality.pdf}
+\caption{Cost--quality plane on held-out sources (macro VUS-PR vs.\
+single-thread p95 per-window latency at 66 channels, log scale; the
+teacher is measured end-to-end at batch 1 (deployment-faithful)). Green and
+orange bands are the E1/E2 latency budgets. The teacher sits in a
+different cost class entirely; the linear floor and the quantized
+PatchMLP students occupy the E1 corner. Pink open squares 1--3 mark the
+Raspberry~Pi~4B on-device measurements of the linear floor, quantized
+PatchMLP, and TCN students (0.44, 2.00, and 15.47\,ms p95 at the
+reference dimension).
+Gray squares 4--5 mark the zero-tuning classical scorers Robust-Z
+(0.008\,ms) and MA-residual (0.022\,ms p95, streaming,
+desktop single-thread).}
+\label{fig:cost}
+\end{figure}
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{What Does TSFM Distillation Actually Transfer?}
+Our design cannot say what distillation transfers in general, but \emph{here}
+it localizes the boundary cleanly. The interface decides. Where fidelity was high, students
+cloned the teacher including its weaknesses; where fidelity was near
+zero, students diverged from the teacher and typically beat it. Under
+the normal-only training constraint, the teacher's scores on clean data
+carry little signal that a compact forecaster cannot extract from the
+raw series itself. The teacher's failure modes (flat scores,
+persistence blind spots) are not worth copying. The forecast target
+tells the complementary story: B2 students, trained to predict the
+teacher's forecast rather than to mimic its score, close most of the gap
+to self-supervision on the development set and show occasional large
+wins. In other words, if a
+TSFM is in the training loop at all, our development-stage data favor
+its \emph{forecasts} over its scores. Detectors trained on either
+target are equivalent within the preregistered 0.05 VUS-PR margin on
+held-out sources (the interval for the forecast-vs-self-supervision
+comparison lies inside the margin), while the score interface is weaker
+than both. We emphasize the limitation. Equivalence of the two
+\emph{training targets} is what the interval supports, not agreement of
+the teacher's forecasts with ground truth. A post-hoc shuffled-teacher
+control (revision R6, exploratory; Figure~\ref{fig:shuffle}) sharpens the point. Retraining the
+score-distilled student with the teacher's scores randomly permuted
+in time (preserving their marginal distribution, destroying their
+temporal alignment; A-PM recipe, 2 seeds, all 20 development flows,
+bootstrap resampling at the flow level) changes mean VUS-PR by only
+$+0.022$ in favor of the true scores (10 wins, 9 losses, 1 tie;
+bootstrap 95\% CI of the mean difference $[-0.027, +0.086]$, crossing
+zero; exploratory).
+The score interface, in this protocol, carries limited information
+beyond the marginal distribution of the teacher's scores, though the
+interval still allows a mean effect as large as $+0.086$.
+Two preregistered controls (R10) probe how general this boundary is.
+A capacity sweep over PatchMLP students at 0.27M, 0.6M, 1.6M, and 5.8M
+parameters (five development flows, three seeds; the largest size under
+revision R13) shows the score-interface deficit narrowing monotonically
+with capacity and closing only near six million parameters.
+Macro score distillation reaches 0.256 versus 0.346 self-supervised at
+0.27M, 0.262 versus 0.342 at 0.6M, 0.291 versus 0.344 at 1.6M, and
+0.332 versus 0.343 at 5.8M, where the gap $-0.011$ falls inside the
+preregistered 0.05 margin (paired mean difference $-0.011$, bootstrap
+95\% CI $[-0.054, +0.030]$, five flows).
+The closing size, however, prices itself out of the edge: the exported
+5.8M student measures 23.2\,MB FP32 and 5.8\,MB quantized,
+4.6 times the E2 storage ceiling in FP32 and just beyond it once quantized,
+far outside E1.
+Within edge-sized students, the interface, not capacity, is the
+binding constraint.
+Per-flow ranking fidelity to the teacher spans essentially its whole
+range in the same runs (median per-flow $\rho$ from $-0.13$ to $0.99$),
+and even at $\rho=0.99$ the distilled student does not exceed
+self-supervised training.
+Ranking transfer, where it occurs, does not by itself buy quality.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/fig_shuffle_scatter.pdf}
+\caption{Shuffled-teacher control (R6, exploratory): per-flow VUS-PR for
+A-PM with real teacher scores (x-axis) vs.\ time-shuffled teacher scores
+(y-axis; same marginal distribution, destroyed temporal alignment; 2
+seeds per flow, paired per flow). The diagonal is $y{=}x$. Real scores
+win on 10 flows, lose on 9, tie on 1; mean difference $+0.022$, 95\% CI
+$[-0.027, +0.086]$ (flow-level bootstrap), crossing zero.}
+\label{fig:shuffle}
+\end{figure}
+A teacher-on-anomaly control (R8) sharpens this further. Even when the
+teacher is given the opportunity to demonstrate anomaly responses in the
+training signal, the outcome depends on whether the teacher actually
+discriminates those anomalies (Figure~\ref{fig:r8bimodal}). This is
+exactly the condition an edge
+deployer cannot verify without running the teacher.
+A second teacher family (TimesFM 2.5) runs behind the same residual-scoring
+structure, with model-specific point forecast extraction (mean output
+rather than median quantile) and context length 1024 rather than 512.
+The extension was registered over all twenty-nine flows and executed on
+thirteen within the compute budget; ten are scorable.
+Three streams are shorter than the locked context (1024) and structurally
+unscorable for this teacher.
+The quality verdict replicates on the ten scorable flows.
+The TimesFM-taught student averages 0.239 against 0.372 for the strongest
+teacher-free arm, wins one flow in ten, and stays within $\pm 0.03$ of
+its Chronos-taught counterpart on seven of ten.
+The mechanism picture diverges in one instructive way, read here as an
+exploratory case study rather than a controlled strength experiment.
+Median ranking fidelity to the TimesFM teacher is 0.70 across 50 runs,
+roughly four times the Chronos-side 0.18.
+It reaches 0.99 on one development flow where the distilled student
+still does not exceed self-supervised training.
+Ranking transfer across teacher families is therefore teacher-dependent,
+and transfer alone buys no quality.
+The TimesFM teacher's own stream-level strength (T0 0.382 vs.\ Chronos
+0.069 on SMD) is not converted into student advantage (0.030).
+A third family completes the triangle.
+Moirai-1.1-R-base (91M, masked-reconstruction architecture, executed under
+revision R16 as registered in R9) is distilled through the same score
+interface on the same five flows.
+Its macro VUS-PR is 0.317, and per-flow ranking fidelity spans -0.20 to
+0.83.
+The instructive pattern repeats.
+On the two flows where fidelity is highest (SVDB $\rho=0.83$, SMD $\rho=0.74$),
+quality is lowest (0.058 and 0.036, both below the self-supervised arms).
+On the flow where quality is best (SWaT 0.588), fidelity is negative
+($\rho=-0.20$).
+Three families, three architectures, one conclusion: ranking transfer and
+quality gain are decoupled regardless of how much of the teacher's ranking
+the student absorbs.
+Could a weak teacher explain the boundary instead?
+The frozen teacher's confirmation macro (0.265) sits below the linear
+floor (0.323), so teacher weakness is a natural confound for the
+no-transfer verdict.
+Three observations separate the interface account from the
+teacher-strength account.
+First, within the five sources where the teacher matches or beats the
+best self-supervised arm per flow, score distillation still adds only
+$+0.018$ mean VUS-PR (group means, exploratory stratification).
+Second, the TimesFM extension provides a same-flow natural experiment.
+On SMD the two teachers differ fivefold in zero-shot strength (TimesFM
+0.382 versus Chronos 0.069), yet their distilled students land within
+$0.025$ of each other (0.030 versus 0.055) and both far below the
+stronger teacher.
+Third, the capacity sweep shows the deficit shrinking smoothly with
+student size and closing only near six million parameters, far beyond
+the edge budgets at stake.
+Teacher strength modulates the ceiling.
+Within the tested boundary, the interface is the binding constraint.
+These results are included in the artifact package.
+
+\subsection{A Transferability Screening Protocol}
+The controls above were run as science, but they double as an engineering
+tool.
+Before committing a TSFM teacher to a distillation pipeline, a deployer
+can screen transferability in three cheap steps, each priced in runs.
+Step one is an information probe.
+Distill once with time-shuffled teacher scores on a handful of streams
+(two seeds, about forty runs in our protocol).
+If real and shuffled scores produce indistinguishable students, the
+score interface carries nothing beyond the score marginal, and the
+teacher earns no place in the loop.
+Step two is a capacity probe.
+Repeat the score-distilled and self-supervised pair at three student
+sizes (about forty-five runs).
+A deficit that survives the largest size is an interface property, not a
+capacity artifact.
+Step three is an interface alternative.
+Swap the target to the teacher's forecasts and compare against plain
+self-supervision (about thirty runs).
+If neither exceeds self-supervision, the teacher can be retired from
+training as well as from inference.
+The full screen costs about 115 runs, roughly one fifth of the
+confirmation budget, and every step reuses cached teacher outputs.
+We present it as a screening heuristic derived from this study's controls.
+It is not a universal guarantee.
+
+\subsection{Deployment Considerations}
+Table~\ref{tab:selection} condenses our results into
+hypothesis-generating observations for deployment planning; it is
+conditional by design and is \emph{not} a validated decision
+procedure. Three practitioner questions frame the table: (i)~Can the
+detector be distilled offline, and how large is the artifact that
+must reach the device? (ii)~Does the teacher need to accompany the
+deployment (it does not, for any student arm)? (iii)~Which anomaly
+morphology is expected on the target stream, and does the chosen
+arm's failure mode match it? Each table row carries its failure
+mode; margins between neural arms are small and not significant.
+
+\begin{table}[t]
+\centering
+\caption{Practitioner selection table (exploratory; conditional on anomaly morphology and budget; see Section \ref{sec:dev-conditional}).}
+\label{tab:selection}
+\scriptsize
+\begin{tabular}{p{2.7cm}p{3.4cm}p{3.4cm}}
+\toprule
+Condition & Observed candidate & Failure mode / caveat \\
+\midrule
+Level or slow-regime anomalies; zero model, zero storage, zero tuning &
+MA-residual (causal moving average, $L{=}128$) & Confirmed near the top of the held-out macro (0.325); blind to short micro-transients inside the averaging window \\
+Level/regime-shift anomalies; storage $\ge$ a few KB; offline reference OK &
+PCA reconstruction (fixed configuration) & Catastrophic on temporal/persistence anomalies (e.g., 0.007 on GHL); reference update needed under drift \\
+Tightest latency budget; any morphology except micro-transients &
+Linear predictor + residual & Median quality below several neural arms (LINEAR dev macro 0.248 vs.\ B1-TCN 0.253, B2-TCN 0.251); window anomalies near stream start invisible \\
+Temporal and persistence anomalies; tightest size budget after INT8 &
+B1 (self-supervised) PatchMLP-lite INT8 & Exploratory dev-source niche (SWaT 0.568 vs.\ 0.446 PCA; single-source observation); occupancy edge over C-PM is matched by zero-tuning robust-z \\
+Small, smooth-deviation anomalies on short streams (exploratory; not validated on held-out sources) &
+Score/ranking-distilled student (C-PM) & Among the weakest arms on held-out sources (macro 0.250; the score arm A-PM is lower at 0.212); margins over B1 are small and not significant; loses the occupancy niche to B1-TCN (B1-TCN 1.000 vs.\ C-PM 0.560 on occupancy) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Threats to Validity}\label{sec:limitations}
+\noindent
+We group threats into internal (identification and statistics),
+external (generalization), and construct (measurement) validity;
+the preregistration revisions R1--R17 and their timing are part of
+the internal-validity record.
+(1)~The distillation signal exists only on normal-only training segments;
+behavioral transfer under real (non-synthetic) anomaly training data remains untested; the synthetic-anomaly control (R8) provides initial evidence.
+(2)~Teacher-family checks cover three families.
+TimesFM 2.5 (decoder-only) spans ten flows and replicates the no-advantage
+verdict with high ranking fidelity (0.70).
+Moirai-1.1-R-base (masked-reconstruction, five flows under R16) repeats
+the pattern with fidelity up to 0.83.
+Three TimesFM streams remain structurally unscorable within the locked
+context.
+(3)~The preregistration designated causal Matrix Profile and LOF as
+auxiliary baselines. Revision R11 added three zero-tuning classical
+baselines (robust-z, MA-residual, LOF-window) under the same scoring
+protocol; causal Matrix Profile remains unexecuted, as its correct
+causal implementation cost remains out of proportion to the question
+once three classical controls are present.
+(4)~The confirmation set has nine sources. With flow-level bootstrap at
+95\%, the observed CI half-widths are 0.05 to 0.10 for neural-arm
+contrasts, so the minimum detectable effect is roughly 0.10 to 0.19
+VUS-PR on the macro scale. The study rules out differences of that
+size and larger, not smaller ones, and all arm-level comparisons are
+non-significant at this sample size. Every no-advantage claim in this
+paper is bounded by that margin.
+(5)~VUS-PR with default buffering is the primary metric; thresholded
+operating points and alerting dynamics are out of scope.
+(6)~The preregistration was amended five times before any
+confirmation-set run (R1--R5) and three more times for exploratory
+controls (R6--R8), each disclosed with its trigger and hash
+(Appendix~\ref{app:hashchain}); late amendments based on dev-only
+evidence are identified as such.
+(7)~On-device measurements on a Raspberry~Pi~4B cover latency, memory,
+and a ten-minute sustained-throughput check with no thermal throttling
+(1800\,MHz throughout, peak 55$\circ$C). Energy profiling remains future
+work, and desktop single-thread figures remain the floor for every
+other configuration.
+(8)~An audit of the training-segment splitter found one development
+source (GECCO) whose fallback split places 1.77\% anomalies in its
+training segment; excluding it raises every arm's development macro by
+0.006 to 0.013 with the ordering unchanged, and the normal-only
+descriptions are otherwise accurate (revision R16).
+
+\section{Conclusion}\label{sec:conclusion}
+We asked what a frozen TSFM
+teacher, what distillation actually transfers, and whether the context
+asymmetry drives the outcome.
+The answers delineate a boundary rather than a verdict.
+First, within the tested boundary, the interface decides what transfers.
+The teacher's \emph{score} interface transfers almost none of its
+ranking behavior (median $\rho=0.184$, sharply bimodal under anomaly
+exposure) and yields no statistically detectable quality benefit.
+All preregistered confirmatory tests are non-significant, and the study
+rules out large differences only, with CIs extending to $+0.10$ and
+$+0.19$ for the two favorable comparisons.
+The teacher's \emph{forecast} interface recovers most of the gap on
+development flows and is equivalent to self-supervision on held-out
+sources, a development-stage preference that did not reach significance
+there.
+Second, the failure is attributable, not anecdotal.
+Shuffled-teacher, equal-context, anomaly-exposure, and
+second-teacher-family controls jointly point to the score interface as
+the most consistent explanation within the tested teachers, capacities,
+and training conditions, without excluding those factors in general.
+Third, the deployment case is settled independently of the quality
+question.
+Students are 200--1500$\times$ cheaper per point than the teacher on
+trained artifacts, and quantized PatchMLP students meet
+sub-millisecond, sub-megabyte budgets at every tested channel count.
+The capacity sweep adds the flip side.
+Score distillation closes its deficit to self-supervision only near
+six million parameters, whose exported artifact measures 23.2\,MB
+(5.8\,MB quantized), so within edge budgets the interface remains
+the binding constraint.
+The contribution is a disciplined, reproducible boundary delineation
+with a mechanism analysis, an interface comparison that redirects
+future work toward forecast targets, and a conditional selection
+table for practitioners.
+
+\backmatter
+\section*{CRediT authorship contribution statement}
+\textbf{Yao Zhang:} Conceptualization, Methodology, Software,
+Investigation, Data curation, Writing -- original draft, Visualization.
+\textbf{Yanling Li:} Supervision, Resources, Writing -- review \& editing.
+\textbf{Yichen Wang:} Data curation, Writing -- review \& editing.
+
+\section*{Declaration of generative AI in the writing process}
+During the preparation of this work the corresponding author used an AI
+assistant (ZCode, GLM) for code development, experiment execution, data
+analysis, and drafting support. All experimental decisions followed a
+preregistered protocol (v1.0 with append-only revisions R1--R17, released
+with the artifacts). The authors verified the results and take full
+responsibility for the content of the published article.
+
+\section*{Funding}
+The authors received no specific funding for this work.
+
+\section*{Competing interests}
+The authors declare no competing interests.
+
+\section*{Data and code availability}
+All code (teacher scoring, student training, export/timing, statistics),
+the preregistration with its revision log (including the full SHA-256
+hash chain of Appendix~\ref{app:hashchain}), per-run results, and the
+teacher-score cache metadata will be released in a public repository
+(GitHub with an archived Zenodo DOI) upon acceptance, and the complete
+artifact package accompanies the submission. Benchmark data are public (TSB-AD-M, TSB-UAD,
+NAB, and the original releases of SMD, PSM, MSL/SMAP, SWaT, HAI 2.2,
+MetroPT3, WADI, J-D, EMG, GHL, GECCO, Exathlon, Opportunity, Genesis,
+Daphnet, MITDB, SVDB). NAB window labels follow the official combined
+label file.
+
+\section*{Acknowledgements}
+The teacher-score cache and the detection-interface configuration were
+developed within a companion research effort and are reused with
+disclosure (Section~\ref{sec:limitations-revision}).
+
+\appendix
+\section{Preregistration Revision Log (Hash Chain)}\label{app:hashchain}
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Preregistration revision log (hash chain). Each row records one
+append-only revision of the preregistration document; the hash column gives
+the first 16 hex characters of the SHA-256 digest of the registered file.}
+\label{tab:hashchain}
+\begin{tabular}{lllp{4.2cm}}
+\toprule
+Rev. & Date/Time & SHA-256 (first 16 hex) & Trigger \\
+\midrule
+v1.0 & 2026-10-03 00:23 & 315881ad7321641f & initial freeze, before any test metric \\
+R1 & 2026-10-03 01:40 & 7e6f55158c350fb9 & smoke-test metadata corrections \\
+R2 & 2026-10-03 12:13 & 14f2dea01a2fcf07 & WADI format, NAB label, ordering fixes \\
+R3 & 2026-10-04 09:17 & ed9ab91e219d26f2 & AB-arm deviation; two-arm confirmation amendment \\
+R4 & 2026-10-04 21:02 & 1948c19c4ff8ff2d & C9 replacement, CPU execution mode \\
+R5 & 2026-10-04 22:50 & 6afbb2cc0720e685 & five-arm confirmation amendment; MP/LOF non-execution disclosure \\
+R6 & 2026-10-06 09:36 & 69177d7d3ae715b8 & shuffled-teacher exploratory control (recorded post-hoc) \\
+R7 & 2026-10-06 21:17 & d9bacd89964b7c65 & interface ablation at teacher context length (recorded pre-run) \\
+R8 & 2026-10-07 22:37 & ab88763bbd684611 & teacher-on-anomaly distillation control (recorded pre-run) \\
+R9 & 2026-10-08 23:33 & d7f5d4e347cbc308 & Moirai third-teacher control (registered pre-run; not executed) \\
+R10 & 2026-10-13 01:08 & 9a8a606d3a3686e5 & submission-hardening controls: second-teacher full-flow, capacity sweep, stratified macro \\
+R11 & 2026-10-17 09:21 & 74143d38e48c8184 & classical baselines (robust-z, MA-residual, LOF-window) and presentation hardening \\
+R12 & 2026-10-17 09:37 & f7d87930c89216b5 & erratum: R11 timing-evidence wording corrected \\
+R13 & 2026-10-17 10:04 & 8284d2bac26f3625 & capacity sweep extension to 5.8M parameters (pre-run) \\
+R14 & 2026-10-17 22:58 & 0f3fd5a2b282210a & classical-baseline latency measurement and cost-plane update (pre-run) \\
+R15 & 2026-10-18 01:42 & 30ba2d792c9cff3f & on-device sustained-throughput and teacher-latency measurements (pre-run) \\
+R16 & 2026-10-18 23:40 & af2f5824507d6682 & leakage audit disclosure, Moirai third-family execution, prospective tenth-source extension, stratified re-analysis \\
+R17 & 2026-10-19 00:22 & f61d9c351fb91c1f & R16 candidate-source erratum: CreditCard, CATSv2, TAO, LTDB \\
+\bottomrule
+\end{tabular}
+\end{table}
+Each revision is append-only; the confirmation data were untouched until
+after R5. Table~\ref{tab:hashchain} lists all eighteen revisions
+with their registered hashes. Revisions R1--R5 were registered before any confirmation-set
+run. R6--R8 are exploratory controls registered post-hoc (R6) or
+pre-run for post-hoc experiments (R7, R8), as flagged in the trigger
+column.
+R9 registered a third-teacher (Moirai) control that stayed unexecuted
+until R16 carried it out on five flows.
+R10 registers the submission-hardening controls, covering a
+capacity-interface sweep registered before its runs, a second-teacher
+full-flow extension registered mid-execution before any result was
+inspected, and a post-hoc stratified re-analysis.
+The preregistration text, this hash chain, and all per-run
+results are part of the artifact package.
+The chain evidences disclosure transparency.
+Full-length hashes and file timestamps are in the artifact package, and
+no external timestamping authority is claimed.
+
+\section{Reproduction Details}\label{app:repro}
+Table~\ref{tab:repro} summarizes the reproduction configuration.
+\begin{table}[t]
+\centering
+\scriptsize
+\caption{Reproduction details.}\label{tab:repro}
+\begin{tabular}{p{3.7cm}p{3.5cm}p{3.5cm}}
+\toprule
+Item & Value & Source \\
+\midrule
+Student backbones & TCN-lite: 4-stage dilated causal conv (96/112/128/128, kernel 5), pool-4 head; PatchMLP-lite: patch 8 (PatchTST~\cite{nie2023patchtst}), dim 128, 2 mixer blocks (MLP-Mixer~\cite{tolstikhin2021mixer}) & artifact code \\
+Parameters (66-ch instance) & TCN-lite 272{,}401; PatchMLP-lite 265{,}617; linear floor 8{,}383 & counted at build \\
+Training & Adam, lr $10^{-3}$, batch 256, 30 epochs, window $L{=}128$, stride 2, per-flow & run manifests \\
+Teacher scoring & context 512 (Chronos-Bolt) / 1024 (TimesFM 2.5); point forecast = median quantile (Chronos) or mean output (TimesFM) & cache metadata \\
+Export & ONNX opset 17; dynamic batch; optional dynamic INT8 & timing script \\
+Run ledger & 1{,}856 total: 1{,}270 preregistered (400 main grid + 420 auxiliary + 450 five-arm confirmation) + 586 post-hoc/controls and additions (90 A-PM confirmation addition + 40 shuffled-teacher R6 + 25 TimesFM subset + 30 interface ablation R7 + 30 anomaly-exposure R8 + 25 TimesFM full-flow R10 + 135 capacity-sweep R10 + 87 classical-baseline scoring R11 + 45 capacity-1024 R13 + 60 extension-arm R16 + 4 extension-evaluation R16 + 15 Moirai R16). Fig.~3 plots all runs with finite fidelity: 389 main-grid plus 420 auxiliary runs & per-run manifests \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Deployment-Cost Matrix on Trained Artifacts}\label{app:cost}
+Table~\ref{tab:costmatrix} reports the full per-configuration cost
+matrix: three architectures at six channel counts (1, 9, 38, 66, 116,
+248, each realized on a real flow of that dimensionality), FP32 and
+dynamic-INT8 variants, five timing rounds each. The timing artifacts
+are case-C students retrained under the confirmation recipe for this
+matrix; latency depends on the computation graph (architecture,
+dimension, precision), not on weight values, and the quality-drift
+column verifies that the deployed artifacts retain detection behavior.
+The end-to-end protocol (stride-1 windows over full test splits,
+single-thread, batch 1) was additionally measured on two development
+flows (NAB cpu, SMD) and one held-out confirmation flow (Daphnet):
+PatchMLP 0.069--0.084\,ms p50, TCN 0.329--0.511\,ms p50.
+
+\input{tables/cost_table}
+
+% bibstyle set via class option sn-basic
+\bibliography{refs}
+
+\end{document}

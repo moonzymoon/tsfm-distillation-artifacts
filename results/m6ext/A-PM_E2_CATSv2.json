@@ -1,0 +1,78 @@
+{
+ "arm": "A-PM",
+ "flow": "E2_CATSv2",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.043,
+   "spearman": 0.2488,
+   "pair_agree": 0.301,
+   "top5_overlap": 0.447,
+   "params": 215441
+  },
+  "s1": {
+   "vus_pr": 0.0454,
+   "spearman": 0.2755,
+   "pair_agree": 0.2637,
+   "top5_overlap": 0.4593,
+   "params": 215441
+  },
+  "s2": {
+   "vus_pr": 0.049,
+   "spearman": 0.2171,
+   "pair_agree": 0.5825,
+   "top5_overlap": 0.45,
+   "params": 215441
+  },
+  "s3": {
+   "vus_pr": 0.0375,
+   "spearman": 0.0079,
+   "pair_agree": 0.0158,
+   "top5_overlap": 0.0296,
+   "params": 215441
+  },
+  "s4": {
+   "vus_pr": 0.0425,
+   "spearman": 0.2908,
+   "pair_agree": 0.5633,
+   "top5_overlap": 0.5192,
+   "params": 215441
+  },
+  "s5": {
+   "vus_pr": 0.0449,
+   "spearman": 0.3021,
+   "pair_agree": 0.606,
+   "top5_overlap": 0.5107,
+   "params": 215441
+  },
+  "s6": {
+   "vus_pr": 0.0452,
+   "spearman": 0.2424,
+   "pair_agree": 0.3775,
+   "top5_overlap": 0.4516,
+   "params": 215441
+  },
+  "s7": {
+   "vus_pr": 0.1032,
+   "spearman": 0.2778,
+   "pair_agree": 0.6092,
+   "top5_overlap": 0.4815,
+   "params": 215441
+  },
+  "s8": {
+   "vus_pr": 0.0427,
+   "spearman": 0.2281,
+   "pair_agree": 0.5883,
+   "top5_overlap": 0.4402,
+   "params": 215441
+  },
+  "s9": {
+   "vus_pr": 0.039,
+   "spearman": 0.0234,
+   "pair_agree": 0.0173,
+   "top5_overlap": 0.0274,
+   "params": 215441
+  }
+ },
+ "mean": 0.0492
+}

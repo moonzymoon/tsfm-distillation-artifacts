@@ -1,0 +1,31 @@
+{
+ "arm": "AB-PM",
+ "flow": "D4_SMD_id20",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0593,
+   "spearman": 0.2055,
+   "pair_agree": 0.5561,
+   "top5_overlap": 0.2536,
+   "params": 238993
+  },
+  "s1": {
+   "vus_pr": 0.0555,
+   "spearman": 0.1272,
+   "pair_agree": 0.5421,
+   "top5_overlap": 0.3071,
+   "params": 238993
+  },
+  "s2": {
+   "vus_pr": 0.0246,
+   "spearman": 0.2689,
+   "pair_agree": 0.6009,
+   "top5_overlap": 0.1464,
+   "params": 238993
+  }
+ },
+ "mean": 0.0465,
+ "std": 0.0155,
+ "wallclock_s": 13.3
+}

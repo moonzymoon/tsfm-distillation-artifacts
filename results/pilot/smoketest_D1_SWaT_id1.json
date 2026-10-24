@@ -1,0 +1,53 @@
+{
+ "D1_SWaT_id1": {
+  "flow": "D1_SWaT_id1",
+  "test_AR": 0.3628,
+  "device": "cuda",
+  "runs": {
+   "A-TCN-s0": {
+    "vus_pr": 0.4098,
+    "params": 272401,
+    "train_s": 3.9
+   },
+   "A-PM-s0": {
+    "vus_pr": 0.4055,
+    "params": 265617,
+    "train_s": 2.0
+   },
+   "C-TCN-s0": {
+    "vus_pr": 0.5297,
+    "params": 272401,
+    "train_s": 3.6
+   },
+   "C-PM-s0": {
+    "vus_pr": 0.5359,
+    "params": 265617,
+    "train_s": 2.5
+   }
+  },
+  "pca": {
+   "vus_pr": 0.4456,
+   "storage_mb": 0.004
+  },
+  "teacher": {
+   "vus_pr": 0.3307
+  },
+  "A-TCN": {
+   "mean": 0.4098,
+   "std": 0.0
+  },
+  "A-PM": {
+   "mean": 0.4055,
+   "std": 0.0
+  },
+  "C-TCN": {
+   "mean": 0.5297,
+   "std": 0.0
+  },
+  "C-PM": {
+   "mean": 0.5359,
+   "std": 0.0
+  },
+  "wallclock_s": 20.8
+ }
+}

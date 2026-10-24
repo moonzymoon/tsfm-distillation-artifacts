@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D14_NAB_cpu24ae8d",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1852,
+   "params": 199057
+  },
+  "s1": {
+   "vus_pr": 0.2552,
+   "params": 199057
+  }
+ },
+ "mean": 0.2202
+}

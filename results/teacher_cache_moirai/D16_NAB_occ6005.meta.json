@@ -1,0 +1,10 @@
+{
+ "teacher": "Salesforce/moirai-1.1-R-base (local, uni2ts 1.1.1 MoiraiForecast)",
+ "context": 1024,
+ "patch": 32,
+ "num_samples": 20,
+ "one_step": true,
+ "flow": "D16_NAB_occ6005",
+ "built": "2026-10-19 08:05:32",
+ "wallclock_s": 25.7
+}

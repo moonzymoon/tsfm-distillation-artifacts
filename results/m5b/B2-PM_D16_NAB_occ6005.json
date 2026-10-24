@@ -1,0 +1,31 @@
+{
+ "arm": "B2-PM",
+ "flow": "D16_NAB_occ6005",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 1.0,
+   "spearman": 0.7415,
+   "pair_agree": 0.779,
+   "top5_overlap": 0.5758,
+   "params": 201106
+  },
+  "s1": {
+   "vus_pr": 1.0,
+   "spearman": 0.78,
+   "pair_agree": 0.797,
+   "top5_overlap": 0.6061,
+   "params": 201106
+  },
+  "s2": {
+   "vus_pr": 1.0,
+   "spearman": 0.7905,
+   "pair_agree": 0.796,
+   "top5_overlap": 0.6667,
+   "params": 201106
+  }
+ },
+ "mean": 1.0,
+ "std": 0.0,
+ "wallclock_s": 2.0
+}

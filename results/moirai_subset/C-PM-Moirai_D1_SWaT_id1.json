@@ -1,0 +1,30 @@
+{
+ "arm": "C-PM-Moirai",
+ "flow": "D1_SWaT_id1",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.5896,
+   "spearman": -0.1975,
+   "pair_agree": 0.4294,
+   "top5_overlap": 0.0,
+   "params": 265617
+  },
+  "s1": {
+   "vus_pr": 0.6244,
+   "spearman": -0.2008,
+   "pair_agree": 0.4316,
+   "top5_overlap": 0.0,
+   "params": 265617
+  },
+  "s2": {
+   "vus_pr": 0.5492,
+   "spearman": -0.1798,
+   "pair_agree": 0.4406,
+   "top5_overlap": 0.027,
+   "params": 265617
+  }
+ },
+ "mean": 0.5877,
+ "median_spearman": -0.1975
+}

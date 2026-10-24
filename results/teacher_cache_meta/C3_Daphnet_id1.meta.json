@@ -1,0 +1,17 @@
+{
+ "flow": "C3_Daphnet_id1",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-04T03:00:49",
+ "wallclock_s": 275.3,
+ "train_shape": [
+  20732,
+  9
+ ],
+ "test_shape": [
+  18042,
+  9
+ ],
+ "test_AR": 0.1278,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

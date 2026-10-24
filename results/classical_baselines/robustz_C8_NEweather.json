@@ -1,0 +1,6 @@
+{
+ "method": "robustz",
+ "flow": "C8_NEweather",
+ "vus_pr": 0.9441,
+ "wallclock_s": 23.4
+}

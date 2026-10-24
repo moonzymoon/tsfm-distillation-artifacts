@@ -1,0 +1,171 @@
+% ---------------------------------------------------------------------------
+% Section 4: Experimental Setup (split from preregistered protocol per JoS
+% convention: setup chapter separate from protocol chapter)
+% ---------------------------------------------------------------------------
+\section{Experimental Setup}\label{sec:setup}
+
+\subsection{Data: Flows and Source Blocking}\label{sec:setup-data}
+The evaluation grid (Table~\ref{tab:flows}) covers 29 preregistered flows drawn from 22 original
+data collections, split into 20 development flows (exploration and arm
+selection) and 9 confirmation flows whose sources are source-blocked from the
+development set. Labels are the official protocol labels of each
+collection throughout; flows whose test segments contain no anomalies are
+excluded from VUS computation and reported as such. Multivariate flows
+are reduced to per-window scores by the teacher aggregation
+(Section~\ref{sec:interface}); univariate flows are scored directly.
+Every flow trains on its unlabeled training segment and is evaluated on
+its disjoint test segment; source-block splits keep the two stages
+disjoint with one disclosed exception (the NAB collection contributes
+streams to both stages). One further caveat is disclosed: SWaT and WADI
+share an operator testbed lineage, and the NAB
+collection contributes several streams to the development set while one
+NAB-derived stream appears in confirmation.
+
+\begin{table}[t]
+\centering
+\caption{Evaluation metrics and protocols per axis. VUS-ROC and the
+tail-agreement companions are computed and shipped with the per-run
+artifacts; the paper text reports VUS-PR, $\rho$, and top-5\% overlap.}
+\label{tab:metrics}
+\scriptsize
+\begin{tabular}{p{1.7cm}p{3.1cm}p{2.3cm}p{2.6cm}}
+\toprule
+Axis & Metric & Tool / protocol & Notes \\
+\midrule
+Quality & VUS-PR (primary), VUS-ROC (secondary; artifact-only) & official VUS implementation, default buffering & no point adjustment; no thresholded $F_1$ \\
+Fidelity & Spearman $\rho$; top-1\%/5\% overlap; pairwise agreement; tail rank agreement (artifact-only) & per-window scores vs.\ teacher scores & reported even when conflicting with quality \\
+Cost & p50/p95 latency per window; file size; peak RSS & single-thread ORT, batch 1; matrix re-timed on trained artifacts, 5 rounds $\times$ (50 warm-up + 500 timed), Appendix~\ref{app:cost} & cold-start excluded (disclosed) \\
+Equivalence & TOST-style interval reading & preregistered margin 0.05 VUS-PR & bootstrap CIs, 5{,}000 resamples \\
+\bottomrule
+\end{tabular}
+\end{table}\begin{table}[t]
+\centering
+\caption{Evaluation flows. Dev$=$development (exploration and arm
+selection); Conf$=$confirmation (held-out sources). Channels are the
+per-window input dimensionality; test points and AR (point-label anomaly
+ratio) refer to the evaluated test segment.}
+\label{tab:flows}
+\setlength{\tabcolsep}{3pt}
+\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\begin{tabular}{p{1.3cm}p{2.55cm}rrrp{0.9cm}}
+\toprule
+Stage & Flow & Collection & Channels & Test points & AR \\
+\midrule
+Dev & SWaT (SWaT-id1) & SWaT testbed & 66 & 5{,}474 & 0.363 \\
+Dev & HAI 2.2 & HAI & 86 & 86{,}400 & 0.010 \\
+Dev & SMD machine-4 & Server Machine Dataset & 38 & 18{,}096 & 0.024 \\
+Dev & SMD machine-20 & Server Machine Dataset & 38 & 6{,}123 & 0.026 \\
+Dev & PSM & Pooled Server Metrics & 25 & 87{,}752 & 0.278 \\
+Dev & MSL-10 / MSL-5 & NASA MSL & 55 & 1{,}510 / 3{,}804 & 0.087 / 0.111 \\
+Dev & SMAP-4 / SMAP-13 & NASA SMAP & 25 & 2{,}191 / 1{,}943 & 0.055 / 0.026 \\
+Dev & GHL-2 & Gas Heating Loop & 19 & 149{,}000 & 0.012 \\
+Dev & SVDB-2 & MIT-BIH SVDB (ECG) & 2 & 175{,}418 & 0.049 \\
+Dev & EMG & EMG (Lobov et al.) & 8 & 130{,}900 & 0.057 \\
+Dev & J-D service-0 & JumpStarter KPI & 38 & 23{,}705 & 0.004 \\
+Dev & NAB cpu-24ae8d / cpu-53ea38 & NAB AWS & 1 & 2{,}016 each & 0.115 / 0.319 \\
+Dev & NAB occupancy-6005 & NAB realTraffic & 1 & 1{,}190 & 0.001 \\
+Dev & NAB machine\-temp & NAB realKnownCause & 1 & 11{,}348 & 0.280 \\
+Dev & Exathlon-1 & Exathlon & 18 & 30{,}476 & 0.178 \\
+Dev & Opportunity & OPP wearable & 248 & 1{,}375 & 0.240 \\
+Dev & GECCO & GECCO water quality & 9 & 55{,}409 & 0.004 \\
+\midrule
+Conf & WADI (A1 train / A2 attack) & WADI & 116 & 172{,}803 & 0.058 \\
+Conf & Genesis & JSA Vol.\,143 slice & 18 & 682 & 0.073 \\
+Conf & Daphnet & Daphnet wearable & 9 & 18{,}042 & 0.128 \\
+Conf & MGAB & MGAB synthetic & 1 & 50{,}000 & 0.003 \\
+Conf & Yahoo-A3 & Yahoo A3 benchmark & 1 & 840 & 0.007 \\
+Conf & IOPS & IOPS KPI & 1 & 74{,}565 & 0.005 \\
+Conf & MITDB-5 & MIT-BIH Arrhythmia (ECG) & 2 & 63{,}087 & 0.007 \\
+Conf & NEweather & NEweather & 8 & 9{,}079 & 0.326 \\
+Conf & NAB exchange-2-cpm & NAB realAdExchange & 1 & 812 & 0.201 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Arms and Reference Baselines}\label{sec:setup-arms}
+Table~\ref{tab:arms} summarizes the compared arms, their training
+signals, and their inference-time footprint. All neural arms share the
+two compact ($\approx$0.27M-parameter) backbones; the linear floor and PCA serve as
+non-neural references. The frozen teacher (T0) is a reference only and
+never participates in deployment.
+
+\begin{table}[t]
+\centering
+\caption{Compared arms. ``Teacher at inference'' indicates whether the
+frozen TSFM must be present when the arm produces anomaly scores on the
+test segment; only the deployed students and the classical references
+run without it.}
+\label{tab:arms}
+\scriptsize
+\begin{tabular}{p{2.2cm}p{3.1cm}p{2.0cm}p{1.5cm}p{1.7cm}}
+\toprule
+Arm & Training signal & Backbone & Teacher at train & Teacher at inference \\
+\midrule
+T0 (teacher) & --- (zero-shot) & Chronos-Bolt-base & --- & \textbf{yes} \\
+A (score) & teacher scores $s_T$ & TCN / PatchMLP & yes & no \\
+C (ranking) & teacher score ranking & TCN / PatchMLP & yes & no \\
+B1 (self-sup.) & next-step residuals & TCN / PatchMLP & no & no \\
+B2 (forecast dist.) & teacher point forecasts & TCN / PatchMLP & yes & no \\
+AB (hybrid) & scores + $\lambda$ forecast align. & TCN / PatchMLP & yes & no \\
+LINEAR (floor) & next-step residuals & linear & no & no \\
+PCA (fixed config.) & train-segment fit (95\% var.) & --- & no & no \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Implementation and Training Details}\label{sec:setup-impl}
+Table~\ref{tab:hyper} lists the training configuration; per-flow manifests
+with the exact values are part of the artifact package. Students are
+trained on a single RTX 5060 Ti (16\,GB); edge timing uses single-thread
+ONNX Runtime 1.28 on the desktop CPU (12th-Gen Intel Core i7-12700F),
+with PyTorch 2.13 for training; the teacher scores on the same GPU.
+
+\begin{table}[t]
+\centering
+\caption{Training and export configuration (identical across arms unless
+stated).}
+\label{tab:hyper}
+\scriptsize
+\begin{tabular}{p{3.4cm}p{8.5cm}}
+\toprule
+Item & Value \\
+\midrule
+Window length $L$ & 128 (standard); 512 (interface ablation, R7) \\
+Stride & 2 (training window sampling) \\
+Optimizer & Adam, lr $10^{-3}$ \\
+Batch size & 256 (A/C scoring arms); 256 (B1/B2); 128 (L=512 ablation) \\
+Epochs & 30, per flow, per seed \\
+Seeds & 5 (main grid); 3 (auxiliary arms); 10 (confirmation) \\
+Backbone parameters (66-ch) & TCN-lite 272{,}401; PatchMLP-lite 265{,}617; linear 8{,}383 \\
+Teacher & Chronos-Bolt-base, context 512, median-quantile point forecast; \\
+ & TimesFM 2.5-200M, context 1024, mean point output (secondary subset) \\
+Export & ONNX opset 17, dynamic batch, optional dynamic INT8 \\
+Edge timing & single-thread ORT, batch 1, p50/p95 over 200 windows \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Evaluation Metrics and Statistical Protocol}\label{sec:setup-metrics}
+Table~\ref{tab:metrics} defines the three axes. Statistics operate at the
+source level. Per-flow seed-averaged scores are compared with two-sided
+exact Wilcoxon signed-rank tests under Holm correction across the
+three preregistered comparisons (raw and adjusted $p$ both reported in
+Section~\ref{sec:confirm-comparisons}, together with the exact test's
+minimum attainable $p$ at $n{=}9$), effect sizes via
+matched-pairs rank-biserial correlation (on ranks of absolute paired
+differences, with sign counts alongside) and raw differences with
+source-level bootstrap 95\% CIs, and vote counts. Equivalence claims use
+the preregistered 0.05 VUS-PR margin (TOST-style interval reading on
+the 95\% CI, which is more conservative than the standard 90\% TOST
+band). Exploratory analyses that resample at the flow level (e.g., the
+shuffled-teacher control) are annotated as such and do not feed the
+source-level claims.
+Any claim of ``retaining teacher performance'' requires this margin with
+interval support. Negative results are reported in full. For clarity,
+the \emph{confirmatory} analyses are exactly the three preregistered
+pairwise comparisons of the confirmation stage; macro rankings, the
+conditional morphology-level analysis, and the practitioner selection
+table are \emph{exploratory} and labelled as such wherever they appear.
+
+

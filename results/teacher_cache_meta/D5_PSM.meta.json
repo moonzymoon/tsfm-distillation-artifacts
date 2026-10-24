@@ -1,0 +1,17 @@
+{
+ "flow": "D5_PSM",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-03T21:22:20",
+ "wallclock_s": 4724.8,
+ "train_shape": [
+  129872,
+  25
+ ],
+ "test_shape": [
+  87752,
+  25
+ ],
+ "test_AR": 0.2778,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

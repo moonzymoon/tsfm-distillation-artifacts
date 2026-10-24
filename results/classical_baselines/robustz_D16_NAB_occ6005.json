@@ -1,0 +1,6 @@
+{
+ "method": "robustz",
+ "flow": "D16_NAB_occ6005",
+ "vus_pr": 1.0,
+ "wallclock_s": 0.3
+}

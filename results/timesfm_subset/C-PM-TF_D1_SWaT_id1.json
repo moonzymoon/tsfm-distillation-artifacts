@@ -1,0 +1,43 @@
+{
+ "arm": "C-PM-TF",
+ "flow": "D1_SWaT_id1",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.437,
+   "spearman": -0.0758,
+   "pair_agree": 0.4914,
+   "top5_overlap": 0.0,
+   "params": 265617
+  },
+  "s1": {
+   "vus_pr": 0.4354,
+   "spearman": -0.0464,
+   "pair_agree": 0.5009,
+   "top5_overlap": 0.0,
+   "params": 265617
+  },
+  "s2": {
+   "vus_pr": 0.4407,
+   "spearman": -0.0644,
+   "pair_agree": 0.4929,
+   "top5_overlap": 0.0,
+   "params": 265617
+  },
+  "s3": {
+   "vus_pr": 0.4328,
+   "spearman": -0.097,
+   "pair_agree": 0.4861,
+   "top5_overlap": 0.0,
+   "params": 265617
+  },
+  "s4": {
+   "vus_pr": 0.4362,
+   "spearman": -0.0178,
+   "pair_agree": 0.5026,
+   "top5_overlap": 0.0,
+   "params": 265617
+  }
+ },
+ "mean": 0.4364
+}

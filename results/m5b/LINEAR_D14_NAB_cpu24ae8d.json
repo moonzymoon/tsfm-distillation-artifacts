@@ -1,0 +1,31 @@
+{
+ "arm": "LINEAR",
+ "flow": "D14_NAB_cpu24ae8d",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.3264,
+   "spearman": 0.3431,
+   "pair_agree": 0.6136,
+   "top5_overlap": 0.2533,
+   "params": 128
+  },
+  "s1": {
+   "vus_pr": 0.3025,
+   "spearman": 0.4042,
+   "pair_agree": 0.6301,
+   "top5_overlap": 0.2133,
+   "params": 128
+  },
+  "s2": {
+   "vus_pr": 0.2864,
+   "spearman": 0.4526,
+   "pair_agree": 0.6476,
+   "top5_overlap": 0.2667,
+   "params": 128
+  }
+ },
+ "mean": 0.3051,
+ "std": 0.0164,
+ "wallclock_s": 1.3
+}

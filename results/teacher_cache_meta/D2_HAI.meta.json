@@ -1,0 +1,17 @@
+{
+ "flow": "D2_HAI",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-03T19:51:16",
+ "wallclock_s": 12676.3,
+ "train_shape": [
+  93601,
+  86
+ ],
+ "test_shape": [
+  86400,
+  86
+ ],
+ "test_AR": 0.0102,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

@@ -1,0 +1,31 @@
+{
+ "arm": "B2-TCN",
+ "flow": "D15_NAB_cpu53ea38",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.2912,
+   "spearman": 0.3088,
+   "pair_agree": 0.617,
+   "top5_overlap": 0.4667,
+   "params": 241714
+  },
+  "s1": {
+   "vus_pr": 0.2916,
+   "spearman": 0.334,
+   "pair_agree": 0.6252,
+   "top5_overlap": 0.44,
+   "params": 241714
+  },
+  "s2": {
+   "vus_pr": 0.2935,
+   "spearman": 0.357,
+   "pair_agree": 0.633,
+   "top5_overlap": 0.4133,
+   "params": 241714
+  }
+ },
+ "mean": 0.2921,
+ "std": 0.001,
+ "wallclock_s": 2.1
+}

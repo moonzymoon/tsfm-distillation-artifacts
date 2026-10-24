@@ -1,0 +1,31 @@
+{
+ "arm": "AB-PM",
+ "flow": "D13_JD1_svc0",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0141,
+   "spearman": 0.7357,
+   "pair_agree": 0.7823,
+   "top5_overlap": 0.516,
+   "params": 238993
+  },
+  "s1": {
+   "vus_pr": 0.0172,
+   "spearman": 0.7684,
+   "pair_agree": 0.7903,
+   "top5_overlap": 0.5332,
+   "params": 238993
+  },
+  "s2": {
+   "vus_pr": 0.014,
+   "spearman": 0.7366,
+   "pair_agree": 0.7685,
+   "top5_overlap": 0.5194,
+   "params": 238993
+  }
+ },
+ "mean": 0.0151,
+ "std": 0.0015,
+ "wallclock_s": 25.6
+}

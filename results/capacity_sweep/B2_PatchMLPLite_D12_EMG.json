@@ -1,0 +1,32 @@
+{
+ "arm": "B2",
+ "backbone": "PatchMLPLite",
+ "flow": "D12_EMG",
+ "params": 206225,
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1191,
+   "spearman": 0.983,
+   "pair_agree": 0.9475,
+   "top5_overlap": 0.8179,
+   "params": 208274
+  },
+  "s1": {
+   "vus_pr": 0.119,
+   "spearman": 0.9829,
+   "pair_agree": 0.9483,
+   "top5_overlap": 0.8168,
+   "params": 208274
+  },
+  "s2": {
+   "vus_pr": 0.1189,
+   "spearman": 0.983,
+   "pair_agree": 0.947,
+   "top5_overlap": 0.8175,
+   "params": 208274
+  }
+ },
+ "mean": 0.119,
+ "median_spearman": 0.983
+}

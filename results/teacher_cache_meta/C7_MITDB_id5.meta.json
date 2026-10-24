@@ -1,0 +1,17 @@
+{
+ "flow": "C7_MITDB_id5",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-04T03:06:50",
+ "wallclock_s": 160.4,
+ "train_shape": [
+  36913,
+  2
+ ],
+ "test_shape": [
+  63087,
+  2
+ ],
+ "test_AR": 0.0074,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

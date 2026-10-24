@@ -1,0 +1,17 @@
+{
+ "flow": "D19_OPP_id3",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-03T16:03:12",
+ "wallclock_s": 5741.1,
+ "train_shape": [
+  26691,
+  248
+ ],
+ "test_shape": [
+  1375,
+  248
+ ],
+ "test_AR": 0.24,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

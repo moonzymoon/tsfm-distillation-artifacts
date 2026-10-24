@@ -1,0 +1,23 @@
+{
+ "tag": "B1-PatchMLPLite-L512",
+ "flow": "D1_SWaT_id1",
+ "L": 512,
+ "case": "B1",
+ "backbone": "PatchMLPLite",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.5059,
+   "params": 670914
+  },
+  "s1": {
+   "vus_pr": 0.552,
+   "params": 670914
+  },
+  "s2": {
+   "vus_pr": 0.5197,
+   "params": 670914
+  }
+ },
+ "mean": 0.5259
+}

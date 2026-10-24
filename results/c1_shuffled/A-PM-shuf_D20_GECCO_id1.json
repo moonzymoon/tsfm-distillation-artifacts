@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D20_GECCO_id1",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0143,
+   "params": 207249
+  },
+  "s1": {
+   "vus_pr": 0.0218,
+   "params": 207249
+  }
+ },
+ "mean": 0.0181
+}

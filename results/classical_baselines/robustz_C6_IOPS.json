@@ -1,0 +1,6 @@
+{
+ "method": "robustz",
+ "flow": "C6_IOPS",
+ "vus_pr": 0.1258,
+ "wallclock_s": 5.5
+}

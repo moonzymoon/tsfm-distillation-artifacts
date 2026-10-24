@@ -1,0 +1,31 @@
+{
+ "arm": "B2-TCN",
+ "flow": "D10_GHL_id2",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.4381,
+   "spearman": -0.106,
+   "pair_agree": 0.4755,
+   "top5_overlap": 0.1619,
+   "params": 250354
+  },
+  "s1": {
+   "vus_pr": 0.438,
+   "spearman": -0.1046,
+   "pair_agree": 0.4725,
+   "top5_overlap": 0.1627,
+   "params": 250354
+  },
+  "s2": {
+   "vus_pr": 0.4385,
+   "spearman": -0.1056,
+   "pair_agree": 0.4775,
+   "top5_overlap": 0.1618,
+   "params": 250354
+  }
+ },
+ "mean": 0.4382,
+ "std": 0.0002,
+ "wallclock_s": 63.2
+}

@@ -1,0 +1,17 @@
+{
+ "flow": "C4_MGAB",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-04T03:02:09",
+ "wallclock_s": 80.3,
+ "train_shape": [
+  50000,
+  1
+ ],
+ "test_shape": [
+  50000,
+  1
+ ],
+ "test_AR": 0.0028,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

@@ -1,0 +1,26 @@
+[
+ {
+  "flow": "D14_NAB_cpu24ae8d",
+  "model": "TCN",
+  "e2e_p50": 0.3537,
+  "e2e_p95": 0.4921
+ },
+ {
+  "flow": "D14_NAB_cpu24ae8d",
+  "model": "PatchMLP",
+  "e2e_p50": 0.0793,
+  "e2e_p95": 0.1171
+ },
+ {
+  "flow": "D3_SMD_id4",
+  "model": "TCN",
+  "e2e_p50": 0.3952,
+  "e2e_p95": 0.5174
+ },
+ {
+  "flow": "D3_SMD_id4",
+  "model": "PatchMLP",
+  "e2e_p50": 0.0968,
+  "e2e_p95": 0.1428
+ }
+]

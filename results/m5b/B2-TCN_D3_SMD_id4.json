@@ -1,0 +1,31 @@
+{
+ "arm": "B2-TCN",
+ "flow": "D3_SMD_id4",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.051,
+   "spearman": 0.0131,
+   "pair_agree": 0.4935,
+   "top5_overlap": 0.0637,
+   "params": 259474
+  },
+  "s1": {
+   "vus_pr": 0.0325,
+   "spearman": 0.0079,
+   "pair_agree": 0.4928,
+   "top5_overlap": 0.0671,
+   "params": 259474
+  },
+  "s2": {
+   "vus_pr": 0.0485,
+   "spearman": 0.0214,
+   "pair_agree": 0.4973,
+   "top5_overlap": 0.0603,
+   "params": 259474
+  }
+ },
+ "mean": 0.044,
+ "std": 0.0082,
+ "wallclock_s": 11.4
+}

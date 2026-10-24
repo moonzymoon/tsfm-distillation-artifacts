@@ -1,0 +1,53 @@
+{
+ "protocol": "single-thread ORT, batch 1, stride-1 windows over the full test split, trained artifacts (case-C, seed 0), 2026-10-09",
+ "rows": [
+  {
+   "flow": "D14_NAB_cpu24ae8d",
+   "heldout": false,
+   "model": "TCN",
+   "n_windows": 1889,
+   "e2e_p50": 0.3285,
+   "e2e_p95": 0.3864
+  },
+  {
+   "flow": "D14_NAB_cpu24ae8d",
+   "heldout": false,
+   "model": "PatchMLP",
+   "n_windows": 1889,
+   "e2e_p50": 0.0694,
+   "e2e_p95": 0.0837
+  },
+  {
+   "flow": "D3_SMD_id4",
+   "heldout": false,
+   "model": "TCN",
+   "n_windows": 17969,
+   "e2e_p50": 0.3627,
+   "e2e_p95": 0.4254
+  },
+  {
+   "flow": "D3_SMD_id4",
+   "heldout": false,
+   "model": "PatchMLP",
+   "n_windows": 17969,
+   "e2e_p50": 0.0839,
+   "e2e_p95": 0.0971
+  },
+  {
+   "flow": "C3_Daphnet_id1",
+   "heldout": true,
+   "model": "TCN",
+   "n_windows": 17915,
+   "e2e_p50": 0.5108,
+   "e2e_p95": 0.6244
+  },
+  {
+   "flow": "C3_Daphnet_id1",
+   "heldout": true,
+   "model": "PatchMLP",
+   "n_windows": 17915,
+   "e2e_p50": 0.0727,
+   "e2e_p95": 0.0824
+  }
+ ]
+}

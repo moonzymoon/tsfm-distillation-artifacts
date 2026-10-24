@@ -1,0 +1,17 @@
+{
+ "flow": "D3_SMD_id4",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-03T12:00:24",
+ "wallclock_s": 881.9,
+ "train_shape": [
+  10609,
+  38
+ ],
+ "test_shape": [
+  18096,
+  38
+ ],
+ "test_AR": 0.024,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

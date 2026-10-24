@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D7_MSL_id5",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.107,
+   "params": 254353
+  },
+  "s1": {
+   "vus_pr": 0.1217,
+   "params": 254353
+  }
+ },
+ "mean": 0.1143
+}

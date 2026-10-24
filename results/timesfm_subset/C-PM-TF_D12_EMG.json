@@ -1,0 +1,43 @@
+{
+ "arm": "C-PM-TF",
+ "flow": "D12_EMG",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1214,
+   "spearman": 0.9919,
+   "pair_agree": 0.9585,
+   "top5_overlap": 0.8734,
+   "params": 206225
+  },
+  "s1": {
+   "vus_pr": 0.1189,
+   "spearman": 0.9911,
+   "pair_agree": 0.9607,
+   "top5_overlap": 0.8669,
+   "params": 206225
+  },
+  "s2": {
+   "vus_pr": 0.1205,
+   "spearman": 0.9927,
+   "pair_agree": 0.9615,
+   "top5_overlap": 0.8905,
+   "params": 206225
+  },
+  "s3": {
+   "vus_pr": 0.1177,
+   "spearman": 0.9944,
+   "pair_agree": 0.9675,
+   "top5_overlap": 0.8962,
+   "params": 206225
+  },
+  "s4": {
+   "vus_pr": 0.1194,
+   "spearman": 0.9908,
+   "pair_agree": 0.9543,
+   "top5_overlap": 0.8588,
+   "params": 206225
+  }
+ },
+ "mean": 0.1196
+}

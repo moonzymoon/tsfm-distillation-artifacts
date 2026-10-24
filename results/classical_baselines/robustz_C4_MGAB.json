@@ -1,0 +1,6 @@
+{
+ "method": "robustz",
+ "flow": "C4_MGAB",
+ "vus_pr": 0.0095,
+ "wallclock_s": 2.3
+}

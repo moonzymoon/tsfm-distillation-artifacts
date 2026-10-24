@@ -1,0 +1,8 @@
+{
+ "teacher_cpu_ms_per_point": 64.707,
+ "model": "amazon/chronos-bolt-base",
+ "threads": 1,
+ "batch": 64,
+ "points_scored": 1024,
+ "date": "2026-10-05"
+}

@@ -1,0 +1,6 @@
+{
+ "arm": "C-PM-TF",
+ "flow": "C9_NAB_adexchange",
+ "skipped": true,
+ "reason": "series shorter than locked context 1024: teacher scores all-NaN (s_tr finite 0/812, s_te finite 0/812)"
+}

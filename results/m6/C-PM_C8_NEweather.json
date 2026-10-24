@@ -1,0 +1,80 @@
+{
+ "arm": "C-PM",
+ "flow": "C8_NEweather",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.932,
+   "spearman": 0.499,
+   "pair_agree": 0.6703,
+   "top5_overlap": 0.3271,
+   "params": 206225
+  },
+  "s1": {
+   "vus_pr": 0.9338,
+   "spearman": 0.497,
+   "pair_agree": 0.6743,
+   "top5_overlap": 0.3201,
+   "params": 206225
+  },
+  "s2": {
+   "vus_pr": 0.9325,
+   "spearman": 0.4994,
+   "pair_agree": 0.6745,
+   "top5_overlap": 0.3107,
+   "params": 206225
+  },
+  "s3": {
+   "vus_pr": 0.9333,
+   "spearman": 0.4965,
+   "pair_agree": 0.6757,
+   "top5_overlap": 0.3131,
+   "params": 206225
+  },
+  "s4": {
+   "vus_pr": 0.9321,
+   "spearman": 0.4955,
+   "pair_agree": 0.6685,
+   "top5_overlap": 0.3224,
+   "params": 206225
+  },
+  "s5": {
+   "vus_pr": 0.9327,
+   "spearman": 0.5008,
+   "pair_agree": 0.673,
+   "top5_overlap": 0.3061,
+   "params": 206225
+  },
+  "s6": {
+   "vus_pr": 0.9348,
+   "spearman": 0.4897,
+   "pair_agree": 0.6703,
+   "top5_overlap": 0.3271,
+   "params": 206225
+  },
+  "s7": {
+   "vus_pr": 0.9334,
+   "spearman": 0.4953,
+   "pair_agree": 0.6693,
+   "top5_overlap": 0.3178,
+   "params": 206225
+  },
+  "s8": {
+   "vus_pr": 0.9358,
+   "spearman": 0.4794,
+   "pair_agree": 0.6655,
+   "top5_overlap": 0.3084,
+   "params": 206225
+  },
+  "s9": {
+   "vus_pr": 0.9325,
+   "spearman": 0.4979,
+   "pair_agree": 0.666,
+   "top5_overlap": 0.3131,
+   "params": 206225
+  }
+ },
+ "mean": 0.9333,
+ "std": 0.0012,
+ "wallclock_s": 219.4
+}

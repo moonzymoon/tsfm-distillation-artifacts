@@ -1,0 +1,88 @@
+% fig_boundary.tex — 20a 门面机制图（TikZ 统一风格 v1.0）v5 终版
+% 双面板：训练阶段三接口路径 / 部署阶段教师退役
+% 语义：nbox=学生蓝 abox=教师红 kbox=自监督绿 win=中性 arr=主流实线 rep=次级虚线
+\documentclass[border=6pt]{standalone}
+\input{figurestyle.sty}
+\begin{document}
+\begin{tikzpicture}[x=1mm, y=1mm]
+
+% ================= 面板 (a)：离线训练 =================
+\begin{scope}
+  \draw[pan] (0,-40) rectangle (150,36);
+  \node[ttl] at (75,31) {(a) Offline training (normal-only segments)};
+
+  % 数据点列（最左）
+  \node[dotn] at (8,14) {};
+  \node[dotn] at (11,13.2) {};
+  \node[dotn] at (14,14.6) {};
+  \node[dotn] at (17,13.8) {};
+  \node[lab] at (14,18.5) {normal-only};
+  \node[lab] at (14,10) {train segments};
+
+  % 冻结教师（左）
+  \node[abox, minimum width=30mm, minimum height=12mm] (tea) at (26,-2)
+    {\textbf{Frozen TSFM}\\[-1pt]\scriptsize Chronos-Bolt 205M};
+  \node[lab, text=red!60!black] at (26,-12) {zero-shot, never adapted};
+
+  % 三接口（中列，垂直大间隔）
+  \node[win, minimum width=30mm] (intS) at (85,22)
+    {\textbf{Score interface}\\[-1pt]\scriptsize teacher scores $s_T$ (A/C arms)};
+  \node[win, minimum width=30mm] (intF) at (85,-2)
+    {\textbf{Forecast interface}\\[-1pt]\scriptsize targets $\hat{x}_T$ (B2 arm)};
+  \node[kbox, minimum width=30mm] (intB) at (85,-26)
+    {\textbf{Self-supervised}\\[-1pt]\scriptsize raw stream only (B1)};
+
+  % 学生（右）
+  \node[nbox, minimum width=28mm, minimum height=12mm] (stu) at (130,-2)
+    {\textbf{Lightweight}\\[-1pt]\textbf{student}\\[-1.5pt]\scriptsize PatchMLP 0.27M};
+
+  % 箭头
+  \draw[arr] (10,11) -- (tea.170);
+  \draw[arr] (tea.20) |- (intS.west);
+  \draw[arr] (tea.0) -- (intF.west);
+  \draw[arr] (14,-26) -- (intB.west) node[lab, pos=0.55, above]{raw stream};
+  \draw[arr] (intS.east) -| (stu.north);
+  \draw[arr] (intF.east) -- (stu.west);
+  \draw[arr] (intB.east) -| (stu.south);
+
+  % 边界提示（面板左中空白：标题下方、数据列上方、连线路径左侧）
+  \node[lab, text=red!60!black, align=center] at (22,24)
+    {score path transfers\\[-2pt]weak ranking fidelity ($\rho \approx 0.18$)};
+\end{scope}
+
+% ================= 面板 (b)：部署 =================
+\begin{scope}[shift={(0,-58)}]
+  \draw[pan] (0,-32) rectangle (150,24);
+  \node[ttl] at (75,19) {(b) Deployment (teacher retired)};
+
+  % 测试流（最左，含异常点）
+  \node[dotn] at (8,-8) {};
+  \node[dotn] at (11,-8.6) {};
+  \node[dota] at (14,-7.9) {};
+  \node[dotn] at (17,-8.7) {};
+  \node[dotn] at (20,-8) {};
+  \node[lab] at (16,-2.5) {held-out test stream};
+  \node[lab] at (16,-18) {normal + anomaly};
+
+  % 学生工件
+  \node[nbox, minimum width=26mm, minimum height=11mm] (art) at (46,-8)
+    {\textbf{Student artifact}\\[-1pt]\scriptsize ONNX, optional INT8};
+
+  % 边缘设备
+  \node[win, minimum width=28mm, minimum height=11mm] (dev) at (96,-8)
+    {\textbf{Edge device}\\[-1pt]\scriptsize Pi 4B, E1--E2 budgets};
+  \node[lab] at (96,-18) {0.44--15.5\,ms p95};
+
+  % 教师退役（右上，淡化，箭头指向部署流方向并打叉）
+  \node[abox, opacity=0.45, minimum width=26mm, minimum height=10mm] (ret) at (108,10)
+    {\textbf{Teacher retired}\\[-1pt]\scriptsize 2.4\,s/point on board};
+  \draw[rep] (ret.south) -- (96,-2.5) node[lab, pos=0.52, right]{not deployed};
+  \node[lab, text=red!60!black] at (99.5,-1.2) {$\times$};
+
+  % 主流箭头（实线）
+  \draw[arr] (23,-8) -- (art.west);
+  \draw[arr] (art.east) -- (dev.west);
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

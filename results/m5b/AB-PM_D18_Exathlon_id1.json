@@ -1,0 +1,31 @@
+{
+ "arm": "AB-PM",
+ "flow": "D18_Exathlon_id1",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.9315,
+   "spearman": 0.25,
+   "pair_agree": 0.576,
+   "top5_overlap": 0.225,
+   "params": 218513
+  },
+  "s1": {
+   "vus_pr": 0.9392,
+   "spearman": 0.2175,
+   "pair_agree": 0.5737,
+   "top5_overlap": 0.2143,
+   "params": 218513
+  },
+  "s2": {
+   "vus_pr": 0.0984,
+   "spearman": -0.4292,
+   "pair_agree": 0.0788,
+   "top5_overlap": 0.0294,
+   "params": 218513
+  }
+ },
+ "mean": 0.6564,
+ "std": 0.3946,
+ "wallclock_s": 11.7
+}

@@ -1,0 +1,31 @@
+{
+ "arm": "LINEAR",
+ "flow": "D17_NAB_machtemp",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.3371,
+   "spearman": 0.1917,
+   "pair_agree": 0.5747,
+   "top5_overlap": 0.2311,
+   "params": 128
+  },
+  "s1": {
+   "vus_pr": 0.3343,
+   "spearman": 0.1942,
+   "pair_agree": 0.5813,
+   "top5_overlap": 0.2292,
+   "params": 128
+  },
+  "s2": {
+   "vus_pr": 0.3292,
+   "spearman": 0.2022,
+   "pair_agree": 0.5725,
+   "top5_overlap": 0.2329,
+   "params": 128
+  }
+ },
+ "mean": 0.3335,
+ "std": 0.0033,
+ "wallclock_s": 3.1
+}

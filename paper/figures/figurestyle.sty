@@ -1,0 +1,52 @@
+% ============================================================
+% figurestyle.sty —— 张垚论文体系统一门面图风格 v1.0
+% 抽取自博士论文1图1（fig_wsar_pipeline v9，经双盲审定稿）
+% 2026-10-21 总管制作
+% ------------------------------------------------------------
+% 用法：主稿导言区 \input{figurestyle.sty}（文件放主稿同目录，
+%       或用相对路径引用本目录）。
+% 适用：架构图/机制示意图（每篇的 Figure 1/2 门面图）。
+% 不适用：实验结果图（折线/散点/热图等继续走 matplotlib 管线）。
+% ------------------------------------------------------------
+% 三条体系规则（画门面图时必须遵守）：
+% 1. 类别双色双形编码：蓝圆=正常类，红方=异常类（灰度打印可辨）；
+%    需要第三类用 kbox（绿），不得另造颜色。
+% 2. 线型语义：实线箭头=主数据流；虚线箭头=回放/次级/辅助流。
+% 3. 整图用 \resizebox{\linewidth}{!}{...} 包装，字体层级只用
+%    ttl/sub/lab 三档，不得另设字号。
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{figurestyle}[2026/10/21 v1.0 unified facade-figure style]
+
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\tikzset{
+  % —— 字体层级（三档） ——
+  ttl/.style={font=\small\bfseries, align=center},            % 面板标题
+  sub/.style={font=\small, align=center, text=black!72},      % 注释说明
+  lab/.style={font=\footnotesize, align=center, text=black!72}, % 小标签
+  % —— 节点 ——
+  win/.style={draw=black!60, rounded corners=1.5pt, inner sep=3pt,
+              align=center, fill=gray!8, minimum height=6.5mm},     % 中性处理框
+  mat/.style={circle, draw=black!70, inner sep=1pt, minimum size=5.2mm,
+              fill=gray!12},                                        % 小圆节点
+  nbox/.style={draw=blue!55!black, fill=blue!8, rounded corners=1.5pt,
+               inner sep=3pt, align=center},                        % 正常类元素
+  abox/.style={draw=red!60!black, fill=red!7, rounded corners=1.5pt,
+               inner sep=3pt, align=center},                        % 异常类元素
+  kbox/.style={draw=green!45!black, fill=green!7, rounded corners=1.5pt,
+               inner sep=3pt, align=center},                        % 第三类扩展位
+  dotn/.style={circle, fill=blue!60!black, inner sep=0pt,
+               minimum size=1.5mm},                                 % 正常类点（圆）
+  dota/.style={rectangle, fill=red!70!black, inner sep=0pt,
+               minimum size=1.5mm},                                 % 异常类点（方）
+  pan/.style={draw=black!30, rounded corners=4pt},                  % 面板底框
+  % —— 箭头 ——
+  arr/.style={-{Stealth[length=2.4mm,width=1.7mm]}, semithick,
+              draw=black!75},                          % 主数据流（实线）
+  rep/.style={-{Stealth[length=2.4mm,width=1.7mm]}, semithick, dashed,
+              draw=black!75},                          % 回放/次级流（虚线）
+}
+
+\endinput

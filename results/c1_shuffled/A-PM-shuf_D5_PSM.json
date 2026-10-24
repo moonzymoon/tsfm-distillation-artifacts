@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D5_PSM",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.3179,
+   "params": 223633
+  },
+  "s1": {
+   "vus_pr": 0.3226,
+   "params": 223633
+  }
+ },
+ "mean": 0.3203
+}

@@ -1,0 +1,6 @@
+{
+ "arm": "C-PM-TF",
+ "flow": "C2_Genesis_id1",
+ "skipped": true,
+ "reason": "series shorter than locked context 1024: teacher scores all-NaN (s_tr finite 14514/15538, s_te finite 0/682)"
+}

@@ -1,0 +1,31 @@
+{
+ "arm": "LINEAR",
+ "flow": "D5_PSM",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.3828,
+   "spearman": 0.0312,
+   "pair_agree": 0.5045,
+   "top5_overlap": 0.0653,
+   "params": 3176
+  },
+  "s1": {
+   "vus_pr": 0.3853,
+   "spearman": 0.0323,
+   "pair_agree": 0.5103,
+   "top5_overlap": 0.0679,
+   "params": 3176
+  },
+  "s2": {
+   "vus_pr": 0.371,
+   "spearman": 0.0423,
+   "pair_agree": 0.5088,
+   "top5_overlap": 0.0763,
+   "params": 3176
+  }
+ },
+ "mean": 0.3797,
+ "std": 0.0062,
+ "wallclock_s": 60.0
+}

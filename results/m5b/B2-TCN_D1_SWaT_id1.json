@@ -1,0 +1,31 @@
+{
+ "arm": "B2-TCN",
+ "flow": "D1_SWaT_id1",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.5378,
+   "spearman": -0.1148,
+   "pair_agree": 0.4708,
+   "top5_overlap": 0.1935,
+   "params": 272914
+  },
+  "s1": {
+   "vus_pr": 0.5498,
+   "spearman": -0.1114,
+   "pair_agree": 0.469,
+   "top5_overlap": 0.1371,
+   "params": 272914
+  },
+  "s2": {
+   "vus_pr": 0.5321,
+   "spearman": -0.1108,
+   "pair_agree": 0.4743,
+   "top5_overlap": 0.1331,
+   "params": 272914
+  }
+ },
+ "mean": 0.5399,
+ "std": 0.0074,
+ "wallclock_s": 13.5
+}

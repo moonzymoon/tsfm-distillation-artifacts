@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D16_NAB_occ6005",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.01,
+   "params": 199057
+  },
+  "s1": {
+   "vus_pr": 0.0134,
+   "params": 199057
+  }
+ },
+ "mean": 0.0117
+}

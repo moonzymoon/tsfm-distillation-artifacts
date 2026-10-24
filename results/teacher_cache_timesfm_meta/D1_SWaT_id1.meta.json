@@ -1,0 +1,17 @@
+{
+ "teacher": "google/timesfm-2.5-200m-pytorch (torch)",
+ "context_len": 1024,
+ "point_forecast": "mean (模型自然点输出)",
+ "built": "2026-10-05T23:27:40",
+ "flow": "D1_SWaT_id1",
+ "wallclock_s": 4036.0,
+ "train_shape": [
+  9522,
+  66
+ ],
+ "test_shape": [
+  5474,
+  66
+ ],
+ "test_AR": 0.3628
+}

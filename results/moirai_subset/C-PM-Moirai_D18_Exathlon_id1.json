@@ -1,0 +1,30 @@
+{
+ "arm": "C-PM-Moirai",
+ "flow": "D18_Exathlon_id1",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.4277,
+   "spearman": -0.0058,
+   "pair_agree": 0.4988,
+   "top5_overlap": 0.3132,
+   "params": 216465
+  },
+  "s1": {
+   "vus_pr": 0.778,
+   "spearman": 0.1343,
+   "pair_agree": 0.5417,
+   "top5_overlap": 0.1902,
+   "params": 216465
+  },
+  "s2": {
+   "vus_pr": 0.844,
+   "spearman": 0.1705,
+   "pair_agree": 0.5617,
+   "top5_overlap": 0.2194,
+   "params": 216465
+  }
+ },
+ "mean": 0.6832,
+ "median_spearman": 0.1343
+}

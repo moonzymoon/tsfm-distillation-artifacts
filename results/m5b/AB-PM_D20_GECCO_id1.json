@@ -1,0 +1,31 @@
+{
+ "arm": "AB-PM",
+ "flow": "D20_GECCO_id1",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0152,
+   "spearman": 0.1003,
+   "pair_agree": 0.5377,
+   "top5_overlap": 0.1221,
+   "params": 209297
+  },
+  "s1": {
+   "vus_pr": 0.0109,
+   "spearman": 0.0826,
+   "pair_agree": 0.528,
+   "top5_overlap": 0.1152,
+   "params": 209297
+  },
+  "s2": {
+   "vus_pr": 0.0121,
+   "spearman": 0.1027,
+   "pair_agree": 0.5373,
+   "top5_overlap": 0.1749,
+   "params": 209297
+  }
+ },
+ "mean": 0.0127,
+ "std": 0.0018,
+ "wallclock_s": 56.8
+}

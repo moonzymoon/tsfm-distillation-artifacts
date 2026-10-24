@@ -1,0 +1,17 @@
+{
+ "flow": "D11_SVDB_id2",
+ "teacher": "amazon/chronos-bolt-base",
+ "context_len": 512,
+ "built": "2026-10-03T11:45:42",
+ "wallclock_s": 377.7,
+ "train_shape": [
+  54982,
+  2
+ ],
+ "test_shape": [
+  175418,
+  2
+ ],
+ "test_AR": 0.0489,
+ "train_cut_rule": "TSB-AD-M=首个异常点前; 其余=前50/60% (见data.py注释)"
+}

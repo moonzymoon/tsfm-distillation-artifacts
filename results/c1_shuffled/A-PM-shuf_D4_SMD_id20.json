@@ -1,0 +1,16 @@
+{
+ "arm": "A-PM-shuffled",
+ "flow": "D4_SMD_id20",
+ "device": "cpu",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.1344,
+   "params": 236945
+  },
+  "s1": {
+   "vus_pr": 0.1583,
+   "params": 236945
+  }
+ },
+ "mean": 0.1464
+}

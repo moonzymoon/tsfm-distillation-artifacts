@@ -1,0 +1,309 @@
+{
+ "protocol": "Raspberry Pi 4B Rev 1.4, 10-minute continuous inference, single-thread ORT 1.31, batch 1, L=128 C=66, governor=performance; sampled every 30s",
+ "configs": {
+  "PatchMLP-INT8": {
+   "samples": [
+    {
+     "t_s": 30.0,
+     "win_per_s": 527.0,
+     "p50_us": 1897.5,
+     "temp_c": 51.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 60.0,
+     "win_per_s": 536.9,
+     "p50_us": 1862.5,
+     "temp_c": 51.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 90.0,
+     "win_per_s": 534.9,
+     "p50_us": 1869.7,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 120.0,
+     "win_per_s": 533.7,
+     "p50_us": 1873.6,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 150.0,
+     "win_per_s": 539.3,
+     "p50_us": 1854.4,
+     "temp_c": 51.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 180.0,
+     "win_per_s": 532.0,
+     "p50_us": 1879.6,
+     "temp_c": 51.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 210.0,
+     "win_per_s": 535.9,
+     "p50_us": 1865.9,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 240.0,
+     "win_per_s": 533.7,
+     "p50_us": 1873.8,
+     "temp_c": 51.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 270.0,
+     "win_per_s": 530.4,
+     "p50_us": 1885.4,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 300.1,
+     "win_per_s": 529.6,
+     "p50_us": 1888.1,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 330.1,
+     "win_per_s": 483.6,
+     "p50_us": 2067.9,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 360.1,
+     "win_per_s": 503.9,
+     "p50_us": 1984.5,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 390.1,
+     "win_per_s": 533.4,
+     "p50_us": 1874.8,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 420.1,
+     "win_per_s": 530.4,
+     "p50_us": 1885.4,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 450.1,
+     "win_per_s": 537.2,
+     "p50_us": 1861.5,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 480.1,
+     "win_per_s": 537.1,
+     "p50_us": 1861.8,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 510.1,
+     "win_per_s": 537.2,
+     "p50_us": 1861.5,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 540.1,
+     "win_per_s": 537.0,
+     "p50_us": 1862.1,
+     "temp_c": 51.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 570.1,
+     "win_per_s": 537.4,
+     "p50_us": 1860.8,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 600.1,
+     "win_per_s": 533.6,
+     "p50_us": 1874.0,
+     "temp_c": 53.6,
+     "freq_mhz": 1800
+    }
+   ],
+   "first_win_per_s": 527.0,
+   "last_win_per_s": 533.6,
+   "min_win_per_s": 483.6,
+   "max_win_per_s": 539.3,
+   "degradation_pct": -1.25,
+   "temp_start_c": 51.6,
+   "temp_max_c": 53.6,
+   "freq_min_mhz": 1800
+  },
+  "LINEAR": {
+   "samples": [
+    {
+     "t_s": 30.0,
+     "win_per_s": 2640.6,
+     "p50_us": 378.7,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 60.0,
+     "win_per_s": 2632.2,
+     "p50_us": 379.9,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 90.0,
+     "win_per_s": 2637.3,
+     "p50_us": 379.2,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 120.0,
+     "win_per_s": 2637.0,
+     "p50_us": 379.2,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 150.0,
+     "win_per_s": 2639.2,
+     "p50_us": 378.9,
+     "temp_c": 52.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 180.0,
+     "win_per_s": 2638.3,
+     "p50_us": 379.0,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 210.0,
+     "win_per_s": 2273.8,
+     "p50_us": 439.8,
+     "temp_c": 52.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 240.0,
+     "win_per_s": 2112.9,
+     "p50_us": 473.3,
+     "temp_c": 54.0,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 270.0,
+     "win_per_s": 2158.9,
+     "p50_us": 463.2,
+     "temp_c": 55.0,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 300.0,
+     "win_per_s": 2115.6,
+     "p50_us": 472.7,
+     "temp_c": 54.5,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 330.1,
+     "win_per_s": 1797.1,
+     "p50_us": 556.4,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 360.1,
+     "win_per_s": 1828.5,
+     "p50_us": 546.9,
+     "temp_c": 54.0,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 390.1,
+     "win_per_s": 2374.5,
+     "p50_us": 421.1,
+     "temp_c": 55.0,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 420.1,
+     "win_per_s": 2636.5,
+     "p50_us": 379.3,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 450.1,
+     "win_per_s": 2624.8,
+     "p50_us": 381.0,
+     "temp_c": 54.0,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 480.1,
+     "win_per_s": 2634.1,
+     "p50_us": 379.6,
+     "temp_c": 53.6,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 510.1,
+     "win_per_s": 2646.1,
+     "p50_us": 377.9,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 540.1,
+     "win_per_s": 2637.4,
+     "p50_us": 379.2,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 570.1,
+     "win_per_s": 2615.1,
+     "p50_us": 382.4,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    },
+    {
+     "t_s": 600.1,
+     "win_per_s": 2623.6,
+     "p50_us": 381.2,
+     "temp_c": 53.1,
+     "freq_mhz": 1800
+    }
+   ],
+   "first_win_per_s": 2640.6,
+   "last_win_per_s": 2623.6,
+   "min_win_per_s": 1797.1,
+   "max_win_per_s": 2646.1,
+   "degradation_pct": 0.64,
+   "temp_start_c": 53.1,
+   "temp_max_c": 55.0,
+   "freq_min_mhz": 1800
+  }
+ }
+}

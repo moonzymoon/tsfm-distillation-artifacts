@@ -1,0 +1,23 @@
+{
+ "tag": "A-PatchMLPLite-L512",
+ "flow": "D3_SMD_id4",
+ "L": 512,
+ "case": "A",
+ "backbone": "PatchMLPLite",
+ "device": "cuda",
+ "runs": {
+  "s0": {
+   "vus_pr": 0.0399,
+   "params": 634049
+  },
+  "s1": {
+   "vus_pr": 0.0344,
+   "params": 634049
+  },
+  "s2": {
+   "vus_pr": 0.0388,
+   "params": 634049
+  }
+ },
+ "mean": 0.0377
+}
